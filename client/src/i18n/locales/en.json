@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "title": {
+      "part1": "Supercharge",
+      "part2": "Your Restaurant's",
+      "part3": "Growth"
+    },
+    "description": "From WhatsApp menus to smart reservations, we provide all the tools you need to delight customers and skyrocket revenue. Get started in minutes!",
+    "cta": "Chat Now"
+  },
+  "nav": {
+    "features": "Features",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "blog": {
+    "title": "Latest Articles",
+    "viewAll": "View all articles"
+  },
+  "footer": {
+    "description": "Revolutionizing the food and beverage industry through innovative digital solutions.",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "rights": "All rights reserved."
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms of Service - Eatoes",
+      "description": "Read our terms of service to understand your rights and responsibilities when using Eatoes restaurant management solutions."
+    },
+    "title": "Terms of Service",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": "By accessing and using Eatoes services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service."
+      },
+      "services": {
+        "title": "Description of Services",
+        "content": "Eatoes provides digital solutions for restaurant management, including but not limited to digital menus, WhatsApp integration, and reservation systems."
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "content": "Your privacy is important to us. Please review our Privacy Policy to understand how we collect, use, and protect your personal information."
+      },
+      "intellectual": {
+        "title": "Intellectual Property",
+        "content": "All content, features, and functionality of Eatoes services are owned by Eatoes and are protected by international copyright, trademark, and other intellectual property laws."
+      },
+      "liability": {
+        "title": "Limitation of Liability",
+        "content": "Eatoes shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services."
+      },
+      "termination": {
+        "title": "Termination",
+        "content": "We reserve the right to terminate or suspend access to our services immediately, without prior notice, for any breach of these Terms of Service."
+      },
+      "contact": {
+        "title": "Contact Information",
+        "content": "If you have any questions about these Terms of Service, please contact us at support@eatoes.com"
+      },
+      "overview": {
+        "title": "Overview",
+        "content": "This website, including all information, tools and services available from this site to you, the user, is conditioned upon your acceptance of all terms, conditions, policies and notices stated here."
+      },
+      "onlineStore": {
+        "title": "Online Store",
+        "content": "By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence."
+      }
+    }
+  }
+} 

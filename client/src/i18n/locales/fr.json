@@ -1,0 +1,121 @@
+{
+  "hero": {
+    "title": {
+      "part1": "Optimisez",
+      "part2": "La Croissance de",
+      "part3": "Votre Restaurant"
+    },
+    "description": "Des menus WhatsApp aux réservations intelligentes, nous fournissons tous les outils nécessaires pour satisfaire vos clients et augmenter vos revenus. Commencez en quelques minutes !",
+    "cta": "Discuter Maintenant"
+  },
+  "nav": {
+    "features": "Fonctionnalités",
+    "testimonials": "Témoignages",
+    "contact": "Contact"
+  },
+  "features": {
+    "title": "Nos Solutions",
+    "subtitle": "Des outils puissants pour votre succès",
+    "digitalMenu": {
+      "title": "Menu Numérique",
+      "description": "Créez des menus QR code interactifs et attrayants pour une expérience client moderne"
+    },
+    "whatsapp": {
+      "title": "Intégration WhatsApp",
+      "description": "Gérez vos commandes et communications directement via WhatsApp"
+    },
+    "analytics": {
+      "title": "Analyses Détaillées",
+      "description": "Suivez vos performances et prenez des décisions éclairées"
+    }
+  },
+  "testimonials": {
+    "title": "Ce Que Disent Nos Clients",
+    "subtitle": "Des restaurateurs satisfaits partout dans le monde",
+    "items": [
+      {
+        "text": "Un outil indispensable pour notre restaurant. La gestion des commandes n'a jamais été aussi simple.",
+        "author": "Marie Dubois",
+        "role": "Propriétaire de Restaurant"
+      }
+    ]
+  },
+  "blog": {
+    "title": "Derniers Articles",
+    "viewAll": "Voir tous les articles",
+    "posts": [
+      {
+        "title": "Révolution du Menu Digital",
+        "description": "Comment les menus QR code transforment l'expérience client et améliorent l'efficacité des restaurants."
+      },
+      {
+        "title": "Gestion Intelligente",
+        "description": "Utiliser la technologie pour optimiser les opérations et améliorer la satisfaction client."
+      },
+      {
+        "title": "WhatsApp pour Restaurants",
+        "description": "Améliorer l'engagement client et simplifier la gestion des commandes avec WhatsApp."
+      },
+      {
+        "title": "L'Avenir de la Restauration",
+        "description": "Les tendances et technologies émergentes qui façonnent l'industrie moderne de la restauration."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contactez-Nous",
+    "description": "Prêt à transformer votre restaurant ? Notre équipe est là pour vous aider avec une démo personnalisée."
+  },
+  "footer": {
+    "description": "Révolutionner l'industrie de la restauration grâce à des solutions numériques innovantes.",
+    "quickLinks": "Liens Rapides",
+    "legal": "Mentions Légales",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation",
+    "rights": "Tous droits réservés.",
+    "social": {
+      "follow": "Suivez-nous"
+    }
+  },
+  "meta": {
+    "title": "Eatoes - Solutions de Gestion pour Restaurants",
+    "description": "Des menus WhatsApp aux réservations intelligentes, nous fournissons tous les outils nécessaires pour satisfaire vos clients et augmenter vos revenus."
+  },
+  "terms": {
+    "meta": {
+      "title": "Conditions d'Utilisation - Eatoes",
+      "description": "Lisez nos conditions d'utilisation pour comprendre vos droits et responsabilités lors de l'utilisation des solutions de gestion de restaurant Eatoes."
+    },
+    "title": "Conditions d'Utilisation",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptation des Conditions",
+        "content": "En accédant et en utilisant les services Eatoes, vous reconnaissez avoir lu, compris et accepté d'être lié par ces Conditions d'Utilisation."
+      },
+      "services": {
+        "title": "Description des Services",
+        "content": "Eatoes fournit des solutions numériques pour la gestion de restaurants, y compris, mais sans s'y limiter, les menus numériques, l'intégration WhatsApp et les systèmes de réservation."
+      },
+      "privacy": {
+        "title": "Politique de Confidentialité",
+        "content": "Votre confidentialité est importante pour nous. Veuillez consulter notre Politique de Confidentialité pour comprendre comment nous collectons, utilisons et protégeons vos informations personnelles."
+      },
+      "intellectual": {
+        "title": "Propriété Intellectuelle",
+        "content": "Tout le contenu, les fonctionnalités et les fonctions des services Eatoes sont la propriété d'Eatoes et sont protégés par les lois internationales sur le droit d'auteur, les marques et autres lois sur la propriété intellectuelle."
+      },
+      "liability": {
+        "title": "Limitation de Responsabilité",
+        "content": "Eatoes ne sera pas responsable des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs résultant de votre utilisation de nos services."
+      },
+      "termination": {
+        "title": "Résiliation",
+        "content": "Nous nous réservons le droit de résilier ou de suspendre l'accès à nos services immédiatement, sans préavis, pour toute violation de ces Conditions d'Utilisation."
+      },
+      "contact": {
+        "title": "Informations de Contact",
+        "content": "Si vous avez des questions concernant ces Conditions d'Utilisation, veuillez nous contacter à support@eatoes.com"
+      }
+    }
+  }
+} 
