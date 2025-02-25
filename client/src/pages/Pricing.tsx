@@ -24,6 +24,9 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 
 const PricingPage = () => {
   const { t } = useTranslation();
+  type Features = typeof features;
+  type FeatureKey = keyof Features;
+
   const [features, setFeatures] = useState({
     tableReservation: { enabled: true, value: 200 },
     whatsapp: { enabled: false, scanCount: 100, messageCount: 100 },
@@ -35,7 +38,7 @@ const PricingPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   // Calculate pricing for table reservations
-  const getTableReservationPrice = (count) => {
+  const getTableReservationPrice = (count: number) => {
     if (count <= 20) return 0;
     if (count <= 100) return 2000;
     if (count <= 300) return 5200;
@@ -53,7 +56,7 @@ const PricingPage = () => {
   };
 
   // Calculate pricing for digital menu
-  const getDigitalMenuPrice = (dishCount) => {
+  const getDigitalMenuPrice = (dishCount: number) => {
     if (dishCount <= 20) return 0;
     if (dishCount <= 50) return 299;
     if (dishCount <= 100) return 499;
@@ -63,7 +66,7 @@ const PricingPage = () => {
   };
 
   // Calculate pricing for valet cars
-  const getValetPrice = (count) => {
+  const getValetPrice = (count: number) => {
     if (count <= 20) return 0;
     if (count <= 100) return 800;
     if (count <= 300) return 1800;
@@ -72,7 +75,7 @@ const PricingPage = () => {
   };
 
   // Update a feature's state
-  const updateFeature = (feature, updates) => {
+  const updateFeature = (feature: FeatureKey, updates: Partial<Features[FeatureKey]>) => {
     setFeatures(prev => ({
       ...prev,
       [feature]: { ...prev[feature], ...updates }
@@ -107,7 +110,7 @@ const PricingPage = () => {
   }, [features]);
 
   // Format price in INR
-  const formatPrice = (price) => {
+  const formatPrice = (price: number) => {
     return `₹${price.toLocaleString('en-IN')}`;
   };
 
