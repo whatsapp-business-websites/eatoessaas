@@ -14,6 +14,7 @@ export default function Navbar() {
     { label: t('nav.features'), href: "#features" },
     { label: t('nav.testimonials'), href: "#testimonials" },
     { label: t('nav.contact'), href: "#contact" },
+    { label: t('nav.pricing') || 'Pricing', href: "/pricing" },
   ];
 
   return (
@@ -33,13 +34,21 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-            >
-              {item.label}
-            </a>
+            item.href.startsWith('#') ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link key={item.href} href={item.href}>
+                <a className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                  {item.label}
+                </a>
+              </Link>
+            )
           ))}
           <LanguageSwitcher />
           <Button variant="outline" className="border-gray-300 hover:bg-gray-100 transition-colors">
@@ -61,14 +70,25 @@ export default function Navbar() {
           <SheetContent>
             <div className="flex flex-col gap-4 pt-8">
               {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </a>
+                item.href.startsWith('#') ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link key={item.href} href={item.href}>
+                    <a 
+                      className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  </Link>
+                )
               ))}
               <Button 
                 variant="outline"

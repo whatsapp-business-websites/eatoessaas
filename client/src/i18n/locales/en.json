@@ -11,7 +11,8 @@
   "nav": {
     "features": "Features",
     "testimonials": "Testimonials",
-    "contact": "Contact"
+    "contact": "Contact",
+    "pricing": "Pricing"
   },
   "blog": {
     "title": "Latest Articles",

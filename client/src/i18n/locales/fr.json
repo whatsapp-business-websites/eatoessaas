@@ -11,7 +11,8 @@
   "nav": {
     "features": "Fonctionnalités",
     "testimonials": "Témoignages",
-    "contact": "Contact"
+    "contact": "Contact",
+    "pricing": "Tarification"
   },
   "features": {
     "title": "Nos Solutions",
