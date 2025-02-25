@@ -1,4 +1,17 @@
+# robots.txt for Eatoes
+
 User-agent: *
 Allow: /
+Allow: /terms
+Allow: /privacy
+Allow: /fr
+Allow: /fr/terms
+Allow: /fr/privacy
 
+# Disallow any potential admin or private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+
+# Sitemap location
 Sitemap: https://eatoes.com/sitemap.xml 
