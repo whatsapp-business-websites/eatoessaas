@@ -26,7 +26,7 @@ const PricingPage = () => {
   const { t } = useTranslation();
   const [features, setFeatures] = useState({
     tableReservation: { enabled: true, value: 200 },
-    whatsapp: { enabled: false, option: 'customerScan' },
+    whatsapp: { enabled: false, scanCount: 100, messageCount: 100 },
     digitalMenu: { enabled: false, value: 50 },
     socialVerification: { enabled: false },
     valetCars: { enabled: false, value: 100 }
@@ -44,13 +44,12 @@ const PricingPage = () => {
   };
 
   // Calculate pricing for WhatsApp API
-  const getWhatsappPrice = (option) => {
-    switch (option) {
-      case 'customerScan': return 39;
-      case 'businessMarketing': return 99;
-      case 'subscription': return 1999;
-      default: return 0;
-    }
+  const getWhatsappPrice = () => {
+    if (!features.whatsapp.enabled) return 0;
+    const basePrice = 1999; // Monthly base price
+    const scanCost = features.whatsapp.scanCount * 0.39;
+    const messageCost = features.whatsapp.messageCount * 0.99;
+    return basePrice + scanCost + messageCost;
   };
 
   // Calculate pricing for digital menu
@@ -89,7 +88,7 @@ const PricingPage = () => {
     }
     
     if (features.whatsapp.enabled) {
-      price += getWhatsappPrice(features.whatsapp.option);
+      price += getWhatsappPrice();
     }
     
     if (features.digitalMenu.enabled) {
@@ -221,25 +220,67 @@ const PricingPage = () => {
                             <Label className="text-lg font-medium">WhatsApp API</Label>
                           </div>
                           <div className="text-xl font-semibold">
-                            {features.whatsapp.enabled ? formatPrice(getWhatsappPrice(features.whatsapp.option)) : '—'}
+                            {features.whatsapp.enabled ? formatPrice(getWhatsappPrice()) : '—'}
                           </div>
                         </div>
                         
                         {features.whatsapp.enabled && (
-                          <div className="pl-10">
-                            <Select
-                              value={features.whatsapp.option}
-                              onValueChange={(value) => updateFeature('whatsapp', { option: value })}
-                            >
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select an option" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="customerScan">Customer Scan (₹39)</SelectItem>
-                                <SelectItem value="businessMarketing">Business Marketing (₹99)</SelectItem>
-                                <SelectItem value="subscription">Subscription (₹1,999)</SelectItem>
-                              </SelectContent>
-                            </Select>
+                          <div className="pl-10 space-y-6">
+                            <div className="text-sm text-muted-foreground mb-4">
+                              Base monthly cost: ₹1,999 + usage
+                            </div>
+
+                            <div className="space-y-4">
+                              <Label className="text-sm text-muted-foreground">Monthly QR scans (₹0.39 per scan)</Label>
+                              <Slider
+                                min={0}
+                                max={10000}
+                                step={100}
+                                value={[features.whatsapp.scanCount]}
+                                onValueChange={(value) => updateFeature('whatsapp', { scanCount: value[0] })}
+                                className="mb-2"
+                              />
+                              <div className="flex justify-between items-center">
+                                <Input
+                                  type="number"
+                                  min={0}
+                                  value={features.whatsapp.scanCount}
+                                  onChange={(e) => updateFeature('whatsapp', { scanCount: parseInt(e.target.value) || 0 })}
+                                  className="w-24"
+                                />
+                                <div className="text-sm text-muted-foreground">
+                                  ₹{(features.whatsapp.scanCount * 0.39).toFixed(2)} for scans
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="space-y-4">
+                              <Label className="text-sm text-muted-foreground">Monthly marketing messages (₹0.99 per message)</Label>
+                              <Slider
+                                min={0}
+                                max={5000}
+                                step={50}
+                                value={[features.whatsapp.messageCount]}
+                                onValueChange={(value) => updateFeature('whatsapp', { messageCount: value[0] })}
+                                className="mb-2"
+                              />
+                              <div className="flex justify-between items-center">
+                                <Input
+                                  type="number"
+                                  min={0}
+                                  value={features.whatsapp.messageCount}
+                                  onChange={(e) => updateFeature('whatsapp', { messageCount: parseInt(e.target.value) || 0 })}
+                                  className="w-24"
+                                />
+                                <div className="text-sm text-muted-foreground">
+                                  ₹{(features.whatsapp.messageCount * 0.99).toFixed(2)} for messages
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="text-sm font-medium mt-4">
+                              Total WhatsApp cost: Base ₹1,999 + QR scans ₹{(features.whatsapp.scanCount * 0.39).toFixed(2)} + Messages ₹{(features.whatsapp.messageCount * 0.99).toFixed(2)}
+                            </div>
                           </div>
                         )}
                       </div>
@@ -369,7 +410,7 @@ const PricingPage = () => {
                         {features.whatsapp.enabled && (
                           <div className="flex justify-between">
                             <span>WhatsApp API</span>
-                            <span>{formatPrice(getWhatsappPrice(features.whatsapp.option))}</span>
+                            <span>{formatPrice(getWhatsappPrice())}</span>
                           </div>
                         )}
                         
