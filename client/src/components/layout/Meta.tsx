@@ -9,7 +9,8 @@ interface MetaProps {
 }
 
 export default function Meta({
-  image = "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738845376665_eatoes%20transparent%20logo%20dark.png",
+  // Using a smaller optimized image for better performance in meta tags
+  image = "https://connectapp.fra1.digitaloceanspaces.com/uploads/eatoes_logo_small.png",
   url = "https://eatoes.com",
 }: MetaProps) {
   const { t, i18n } = useTranslation();

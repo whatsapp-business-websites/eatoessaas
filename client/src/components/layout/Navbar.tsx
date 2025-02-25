@@ -24,14 +24,14 @@ export default function Navbar() {
             <img 
               src="https://connectapp.fra1.digitaloceanspaces.com/uploads/1738845376665_eatoes%20transparent%20logo%20dark.png"
               alt="Eatoes Logo"
-              className="h-24 md:h-32 w-auto"
+              className="h-6 md:h-8 w-auto"
               loading="eager"
             />
           </a>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -42,6 +42,9 @@ export default function Navbar() {
             </a>
           ))}
           <LanguageSwitcher />
+          <Button variant="outline" className="border-gray-300 hover:bg-gray-100 transition-colors">
+            Login/Signup
+          </Button>
           <Button className="bg-black text-white hover:bg-gray-800 transition-colors">
             {t('hero.cta')}
           </Button>
@@ -51,7 +54,7 @@ export default function Navbar() {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="ghost" size="icon" className="p-2">
-              <Menu className="h-8 w-8" aria-hidden="true" />
+              <Menu className="h-10 w-10" aria-hidden="true" />
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
@@ -68,7 +71,15 @@ export default function Navbar() {
                 </a>
               ))}
               <Button 
+                variant="outline"
+                className="w-full border-gray-300 hover:bg-gray-100 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Login/Signup
+              </Button>
+              <Button 
                 className="w-full bg-black text-white hover:bg-gray-800 transition-colors"
+                onClick={() => setIsOpen(false)}
               >
                 Chat Now
               </Button>

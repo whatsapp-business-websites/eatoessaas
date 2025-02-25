@@ -34,9 +34,9 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-16 sm:py-24 bg-muted/20">
-      <div className="container">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12 sm:mb-16">
+    <section id="features" className="py-12 sm:py-16 md:py-24 bg-muted/20">
+      <div className="container mx-auto">
+        <div className="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8 text-center mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ export default function Features() {
           </motion.div>
         </div>
 
-        <div className="space-y-16 sm:space-y-24 px-4 sm:px-6 lg:px-8">
+        <div className="space-y-12 sm:space-y-16 md:space-y-24 px-6 sm:px-8 lg:px-8">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}

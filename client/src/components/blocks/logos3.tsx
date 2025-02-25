@@ -25,51 +25,171 @@ const Logos3 = ({
   logos = [
     {
       id: "logo-1",
-      description: "Fine Dining Restaurant",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "2",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738843994840_2.png",
+      className: "h-20 w-auto sm:h-24",
     },
     {
       id: "logo-2",
-      description: "Upscale Bistro",
-      image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "3",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738843995580_3.png",
+      className: "h-20 w-auto sm:h-24",
     },
     {
       id: "logo-3",
-      description: "Modern Café",
-      image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "4",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738843996396_4.png",
+      className: "h-20 w-auto sm:h-24",
     },
     {
       id: "logo-4",
-      description: "Italian Restaurant",
-      image: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "5",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738843997050_5.png",
+      className: "h-20 w-auto sm:h-24",
     },
     {
       id: "logo-5",
-      description: "Seaside Restaurant",
-      image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "6",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738843997719_6.png",
+      className: "h-20 w-auto sm:h-24",
     },
     {
       id: "logo-6",
-      description: "Asian Fusion",
-      image: "https://images.unsplash.com/photo-1526069631228-723c945bea6b?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "7",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738843998357_7.png",
+      className: "h-20 w-auto sm:h-24",
     },
     {
       id: "logo-7",
-      description: "French Cuisine",
-      image: "https://images.unsplash.com/photo-1515669097368-22e68427d265?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "Akan",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738843999355_Akan.png",
+      className: "h-20 w-auto sm:h-24",
     },
     {
       id: "logo-8",
-      description: "Mediterranean Restaurant",
-      image: "https://images.unsplash.com/photo-1523568129082-a8d6c095638e?w=200&h=100&fit=crop&q=80",
-      className: "h-12 w-auto sm:h-16",
+      description: "Amnesia",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844000345_Amnesia.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-9",
+      description: "Animal",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844001141_Animal.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-10",
+      description: "Babylon",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844001668_Babylon.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-11",
+      description: "By the bottle",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844002485_By%20the%20bottle.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-12",
+      description: "Chirp",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844003147_Chirp.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-13",
+      description: "Flying Tortoise",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844003957_Flyingtortoise.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-14",
+      description: "Fusion 9",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844004621_Fusion%209.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-15",
+      description: "Grease Monkey",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844005402_Grease%20Monkey.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-16",
+      description: "Hashi",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844006251_Hashi.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-17",
+      description: "Kiik69",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844006901_kiik69.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-18",
+      description: "Makobrew",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844007541_Makobrew.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-19",
+      description: "One Golf",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844008193_Onegolf.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-20",
+      description: "Postcard",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844008951_Postcard.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-21",
+      description: "Qiqi",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844009463_Qiqi.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-22",
+      description: "Renao",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844010279_Renao.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-23",
+      description: "Sounds n Spirits",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844010938_Sounds%20n%20spirits.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-24",
+      description: "Ta Qila",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844011685_Ta_qila.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-25",
+      description: "Tasca",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844012510_Tasca.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-26",
+      description: "The Rabbit Hole",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844013143_The%20Rabbit%20Hole.png",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-27",
+      description: "Theia",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844013978_Theia.jpg",
+      className: "h-20 w-auto sm:h-24",
+    },
+    {
+      id: "logo-28",
+      description: "Velvet Patisserie",
+      image: "https://connectapp.fra1.digitaloceanspaces.com/uploads/1738844014821_velvet%20patisserie.jpg",
+      className: "h-20 w-auto sm:h-24",
     }
   ],
 }: Logos3Props) => {
@@ -92,7 +212,7 @@ const Logos3 = ({
                   key={logo.id}
                   className="flex basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 justify-center pl-0"
                 >
-                  <div className="mx-4 sm:mx-6 flex shrink-0 items-center justify-center">
+                  <div className="mx-2 sm:mx-3 flex shrink-0 items-center justify-center">
                     <div>
                       <img
                         src={logo.image}

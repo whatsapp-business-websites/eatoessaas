@@ -14,7 +14,7 @@ export default function Footer() {
               <img 
                 src="https://connectapp.fra1.digitaloceanspaces.com/uploads/1738845376665_eatoes%20transparent%20logo%20dark.png"
                 alt="Eatoes Logo"
-                className="h-24 md:h-32 w-auto"
+                className="h-8 md:h-10 w-auto"
                 loading="lazy"
               />
             </div>

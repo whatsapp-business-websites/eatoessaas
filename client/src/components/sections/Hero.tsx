@@ -34,7 +34,7 @@ export default function Hero() {
         </ImageTrail>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 sm:px-8 relative z-10">
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -42,16 +42,16 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
               Power Up Your Restaurant's Growth
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               From WhatsApp menus to smart reservations, we've built everything you need to delight customers and boost revenue. Get started in minutes.
             </p>
             <div className="pt-4">
               <Button 
                 size="lg" 
-                className="bg-black text-white hover:bg-gray-800 transition-colors px-8"
+                className="bg-black text-white hover:bg-gray-800 transition-colors px-8 py-3 w-full sm:w-auto"
               >
                 Chat Now
               </Button>

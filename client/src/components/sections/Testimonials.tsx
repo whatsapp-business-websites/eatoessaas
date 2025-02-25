@@ -46,8 +46,8 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-16 sm:py-24 bg-muted/20">
-      <div className="container">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12 sm:mb-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -61,44 +61,42 @@ export default function Testimonials() {
           </motion.div>
         </div>
 
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-            {displayedTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full hover:bg-muted/50 transition-colors duration-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <Avatar className="h-12 w-12">
-                        <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                        <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <div>
-                            <h4 className="font-semibold text-base flex items-center gap-1">
-                              {testimonial.name}
-                              {testimonial.verified && (
-                                <VerifiedIcon className="h-4 w-4 text-blue-500" />
-                              )}
-                            </h4>
-                            <p className="text-sm text-muted-foreground">{testimonial.handle}</p>
-                          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto px-4 sm:px-6">
+          {displayedTestimonials.map((testimonial, index) => (
+            <motion.div
+              key={testimonial.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="h-full hover:bg-muted/50 transition-colors duration-200">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-12 w-12">
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                      <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <div>
+                          <h4 className="font-semibold text-base flex items-center gap-1">
+                            {testimonial.name}
+                            {testimonial.verified && (
+                              <VerifiedIcon className="h-4 w-4 text-blue-500" />
+                            )}
+                          </h4>
+                          <p className="text-sm text-muted-foreground">{testimonial.handle}</p>
                         </div>
-                        <p className="mt-3 text-base leading-relaxed">{testimonial.content}</p>
-                        <p className="mt-2 text-sm text-muted-foreground">{testimonial.role}</p>
                       </div>
+                      <p className="mt-3 text-base leading-relaxed">{testimonial.content}</p>
+                      <p className="mt-2 text-sm text-muted-foreground">{testimonial.role}</p>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
 
         <div className="mt-8 px-4 sm:px-6 text-center md:hidden">
