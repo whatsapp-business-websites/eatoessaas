@@ -39,6 +39,16 @@ export default function Meta({
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={image} />
+      
+      {/* Social Media Profiles */}
+      <meta property="og:see_also" content="https://www.instagram.com/eatoesofficial/" />
+      <meta property="og:see_also" content="https://www.facebook.com/eatoesofficial" />
+      <meta property="og:see_also" content="https://www.linkedin.com/company/eatoes" />
+      <meta property="og:see_also" content="https://x.com/eatoesofficial" />
+      
+      {/* Twitter Username */}
+      <meta name="twitter:site" content="@eatoesofficial" />
+      <meta name="twitter:creator" content="@eatoesofficial" />
 
       {/* Additional SEO tags */}
       <link rel="canonical" href={currentUrl} />

@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 
 const features = [
   {
@@ -15,6 +17,7 @@ const features = [
     description: "Dynamic QR code menus with real-time updates, seasonal specials, and multilingual support. Enhance your customer's dining experience with beautiful, interactive digital menus.",
     image: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&q=80",
     cta: "Learn more",
+    link: "/en/features/digital-menu",
   },
   {
     icon: CalendarRange,
@@ -22,6 +25,7 @@ const features = [
     description: "Streamline reservations and optimize seating with our intelligent booking system. Reduce no-shows and maximize your restaurant's capacity with smart scheduling.",
     image: "https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&q=80",
     cta: "Explore features",
+    link: "/en/features/table-reservations",
   },
   {
     icon: MessageSquare,
@@ -29,10 +33,14 @@ const features = [
     description: "Connect with customers directly through WhatsApp for orders and updates. Build stronger relationships and provide instant support through their preferred channel.",
     image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&q=80",
     cta: "See how it works",
+    link: "/en/features/whatsapp-integration",
   },
 ];
 
 export default function Features() {
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language;
+  
   return (
     <section id="features" className="py-12 sm:py-16 md:py-24 bg-muted/20">
       <div className="container mx-auto">
@@ -73,9 +81,11 @@ export default function Features() {
                 <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
                   {feature.description}
                 </p>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  {feature.cta}
-                </Button>
+                <Link href={currentLang === 'fr' ? feature.link.replace('/en/', '/fr/') : feature.link}>
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    {feature.cta}
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           ))}
