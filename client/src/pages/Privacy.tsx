@@ -2,9 +2,13 @@ import { useTranslation } from 'react-i18next';
 import Meta from "@/components/layout/Meta";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import useScrollToTop from "@/hooks/useScrollToTop";
 
 export default function Privacy() {
   const { t } = useTranslation();
+  
+  // Use the scroll to top hook
+  useScrollToTop();
 
   return (
     <>
@@ -14,23 +18,23 @@ export default function Privacy() {
       />
       <div className="min-h-screen">
         <Navbar />
-        <main className="container mx-auto px-4 py-16 sm:py-24">
-          <div className="max-w-4xl mx-auto prose prose-gray dark:prose-invert">
-            <h1 className="text-3xl font-bold mb-8">Privacy Policy</h1>
+        <main className="container mx-auto px-4 pt-24 pb-8 sm:pt-28 sm:pb-16 md:pt-32 md:pb-24">
+          <div className="max-w-4xl mx-auto prose prose-gray dark:prose-invert prose-sm sm:prose-base">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Privacy Policy</h1>
             
-            <section className="mb-8">
-              <p className="text-lg">
+            <section className="mb-6 sm:mb-8">
+              <p className="text-base sm:text-lg">
                 This Privacy Policy describes how your personal information is collected, used, and shared 
                 when you visit or make a purchase from the website.
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Personal Information Collected</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Personal Information Collected</h2>
               <p>
                 When you visit the Site, we automatically collect certain information about your device, including:
               </p>
-              <ul className="list-disc pl-6 mb-4">
+              <ul className="list-disc pl-4 sm:pl-6 mb-3 sm:mb-4">
                 <li>Information about your web browser</li>
                 <li>IP address</li>
                 <li>Time zone</li>
@@ -39,16 +43,16 @@ export default function Privacy() {
               <p>
                 Additionally, as you browse the Site, we collect information about:
               </p>
-              <ul className="list-disc pl-6 mb-4">
+              <ul className="list-disc pl-4 sm:pl-6 mb-3 sm:mb-4">
                 <li>Individual web pages or products that you view</li>
                 <li>Websites or search terms that referred you to the Site</li>
                 <li>How you interact with the Site</li>
               </ul>
               <p>We refer to this automatically-collected information as "Device Information."</p>
 
-              <h3 className="text-xl font-semibold mt-6 mb-3">Collection Technologies</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mt-4 sm:mt-6 mb-2 sm:mb-3">Collection Technologies</h3>
               <p>We collect Device Information using the following technologies:</p>
-              <ul className="list-disc pl-6 mb-4">
+              <ul className="list-disc pl-4 sm:pl-6 mb-3 sm:mb-4">
                 <li>
                   <strong>Cookies:</strong> Data files placed on your device that often include an anonymous unique identifier. 
                   <a href="http://www.allaboutcookies.org" className="text-primary hover:underline ml-1" target="_blank" rel="noopener noreferrer">
@@ -66,10 +70,10 @@ export default function Privacy() {
               </ul>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Usage of Personal Information</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Usage of Personal Information</h2>
               <p>We use Order Information to:</p>
-              <ul className="list-disc pl-6 mb-4">
+              <ul className="list-disc pl-4 sm:pl-6 mb-3 sm:mb-4">
                 <li>Fulfill orders placed through the Site</li>
                 <li>Process payments</li>
                 <li>Arrange shipping</li>
@@ -80,10 +84,10 @@ export default function Privacy() {
               </ul>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Sharing Personal Information</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Sharing Personal Information</h2>
               <p>We share your Personal Information with trusted third parties:</p>
-              <ul className="list-disc pl-6 mb-4">
+              <ul className="list-disc pl-4 sm:pl-6 mb-3 sm:mb-4">
                 <li>
                   <strong>Google Analytics:</strong> To understand how customers use the Site. 
                   <a href="https://www.google.com/intl/en/policies/privacy/" className="text-primary hover:underline ml-1" target="_blank" rel="noopener noreferrer">
@@ -99,23 +103,23 @@ export default function Privacy() {
               </ul>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Data Retention</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Data Retention</h2>
               <p>
                 We maintain your Order Information for our records unless and until you ask us to delete this information.
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Changes to Privacy Policy</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Changes to Privacy Policy</h2>
               <p>
                 We may update this privacy policy from time to time to reflect changes to our practices or for other 
                 operational, legal or regulatory reasons.
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Contact Us</h2>
               <p>
                 For more information about our privacy practices, if you have questions, or if you would like to make a 
                 complaint, please contact us via our Contact Us form on our website.

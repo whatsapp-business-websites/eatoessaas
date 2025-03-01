@@ -2,9 +2,13 @@ import { useTranslation } from 'react-i18next';
 import Meta from "@/components/layout/Meta";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import useScrollToTop from "@/hooks/useScrollToTop";
 
 export default function Terms() {
   const { t } = useTranslation();
+  
+  // Use the scroll to top hook
+  useScrollToTop();
 
   return (
     <>
@@ -14,12 +18,12 @@ export default function Terms() {
       />
       <div className="min-h-screen">
         <Navbar />
-        <main className="container mx-auto px-4 py-16 sm:py-24">
-          <div className="max-w-4xl mx-auto prose prose-gray dark:prose-invert">
-            <h1 className="text-3xl font-bold mb-8">Terms of Service</h1>
+        <main className="container mx-auto px-4 pt-24 pb-8 sm:pt-28 sm:pb-16 md:pt-32 md:pb-24">
+          <div className="max-w-4xl mx-auto prose prose-gray dark:prose-invert prose-sm sm:prose-base">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Terms of Service</h1>
             
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Overview</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Overview</h2>
               <p>
                 This website, including all information, tools and services available from this site to you, the user, 
                 is conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
@@ -37,8 +41,8 @@ export default function Terms() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Online Store</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Online Store</h2>
               <p>
                 By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state 
                 or province of residence, or that you are the age of majority in your state or province of residence and you 
@@ -54,8 +58,8 @@ export default function Terms() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">General</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">General</h2>
               <p>
                 We reserve the right to refuse service to anyone for any reason at any time.
               </p>
@@ -66,8 +70,8 @@ export default function Terms() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Products and Services</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Products and Services</h2>
               <p>
                 Certain products or services may be available exclusively online through the website. These products or services 
                 may have limited quantities and are subject to return or exchange only according to our Return Policy.
@@ -83,8 +87,8 @@ export default function Terms() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Third Party Services</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Third Party Services</h2>
               <p>
                 We use Razorpay as a payment gateway. The services of Razorpay are subject to their terms and conditions which 
                 can be found at their website.
@@ -98,8 +102,8 @@ export default function Terms() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Refund Policy</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Refund Policy</h2>
               <p>
                 Our policy lasts 36 hours. If within 36 hours of your purchase you find any defects or damages to the product 
                 please contact us on the store number from where the item was purchased.
@@ -114,8 +118,8 @@ export default function Terms() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Store Collection / Delivery</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Store Collection / Delivery</h2>
               <p>
                 No refunds or replacements will be offered for orders or products if the items are not collected on the date 
                 for which the booking has been made.
@@ -127,8 +131,8 @@ export default function Terms() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
+            <section className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Contact Information</h2>
               <p>
                 Questions about the Terms of Service should be sent to us via our Contact Us form on our website.
               </p>

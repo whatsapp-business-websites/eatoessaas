@@ -3,46 +3,78 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { VerifiedIcon } from "lucide-react";
+import { VerifiedIcon, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Chen",
-    handle: "@sarahchen",
+    name: "Anjali Desai",
+    handle: "@anjalidesai",
+    role: "Co-Founder, Fusion Bites",
+    content: "Eatoes has completely transformed the way we handle table reservations. Customers can now book in seconds, and we no longer have to deal with endless phone calls. The integration with Google and social media is a game-changer!",
+    rating: 5,
+    verified: true
+  },
+  {
+    name: "Restaurant Owner",
+    handle: "@valetservice",
+    role: "Fine Dining Restaurant",
+    content: "The valet automation system has made our parking experience effortless. Our guests love the convenience, and our staff no longer have to scramble to manage requests. It's a simple yet powerful solution that we can't imagine operating without.",
+    rating: 5,
+    verified: true
+  },
+  {
+    name: "Restaurant Manager",
+    handle: "@whatsappking",
+    role: "Restaurant Manager",
+    content: "Eatoes' WhatsApp API has helped us stay connected with customers like never before. From handling reservations to answering FAQs across multiple platforms, everything is automated yet feels personal. This has boosted our efficiency and customer satisfaction.",
+    rating: 5,
+    verified: true
+  },
+  {
+    name: "Marketing Director",
+    handle: "@marketingpro",
+    role: "Marketing Director",
+    content: "Our ads weren't converting the way we wanted—until we started using Click-to-WhatsApp. Now, instead of just viewing our ads, potential customers start conversations instantly. Our sales have increased dramatically!",
+    rating: 5,
+    verified: true
+  },
+  {
+    name: "Business Owner",
+    handle: "@datadriven",
     role: "Restaurant Owner",
-    content: "Eatoes has transformed how we manage our restaurant. The digital menu and reservation system have significantly improved our efficiency. Our customers love the seamless experience! 🚀",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop",
+    content: "The insights we get from Eatoes have been a game-changer. We now understand customer behavior better and can make informed decisions to grow our business.",
+    rating: 5,
     verified: true
   },
   {
-    name: "Michael Rodriguez",
-    handle: "@mrodriguez",
-    role: "Café Manager",
-    content: "The social media integration and WhatsApp features have helped us stay connected with our customers and improve engagement. Our marketing has never been easier! 📱",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+    name: "New Restaurant Owner",
+    handle: "@easysetup",
+    role: "Restaurant Owner",
+    content: "Eatoes made it so easy for us to get started. No lengthy meetings, no complex setups—just a plug-and-play system that instantly enhanced our customer experience. The support team is fantastic too!",
+    rating: 5,
     verified: true
   },
   {
-    name: "Emily Watson",
-    handle: "@emilyw",
-    role: "F&B Director",
-    content: "A complete game-changer for our multi-location business. The analytics and management tools are invaluable. We've seen a 40% increase in customer satisfaction! 📈",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+    name: "Social Media Manager",
+    handle: "@multiplatform",
+    role: "Restaurant Chain Manager",
+    content: "Managing customer queries across Facebook, Instagram, and Google used to be chaotic. With Eatoes, everything is centralized and automated, making customer communication smoother and more efficient than ever.",
+    rating: 5,
     verified: true
   },
   {
-    name: "David Kim",
-    handle: "@davidkim",
-    role: "Restaurant Chain Owner",
-    content: "Managing multiple locations has never been easier. The unified dashboard and real-time analytics help us make data-driven decisions. Highly recommend! 💯",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop",
+    name: "Restaurant Partner",
+    handle: "@growthpartner",
+    role: "F&B Business Owner",
+    content: "Eatoes doesn't just provide software; they genuinely care about helping businesses grow. Their solutions are practical, innovative, and incredibly easy to use. Highly recommended for any restaurant or F&B business!",
+    rating: 5,
     verified: true
   }
 ];
 
 export default function Testimonials() {
   const [showAll, setShowAll] = useState(false);
-  const displayedTestimonials = showAll ? testimonials : testimonials.slice(0, 2);
+  const displayedTestimonials = showAll ? testimonials : testimonials.slice(0, 3);
 
   return (
     <section id="testimonials" className="py-16 sm:py-24 bg-muted/20">
@@ -61,7 +93,7 @@ export default function Testimonials() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4 sm:px-6">
           {displayedTestimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -73,8 +105,7 @@ export default function Testimonials() {
               <Card className="h-full hover:bg-muted/50 transition-colors duration-200">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <Avatar className="h-12 w-12">
-                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                    <Avatar className="h-12 w-12 bg-primary/10">
                       <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
@@ -86,11 +117,15 @@ export default function Testimonials() {
                               <VerifiedIcon className="h-4 w-4 text-blue-500" />
                             )}
                           </h4>
-                          <p className="text-sm text-muted-foreground">{testimonial.handle}</p>
+                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                         </div>
                       </div>
+                      <div className="flex gap-0.5 mt-2">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
                       <p className="mt-3 text-base leading-relaxed">{testimonial.content}</p>
-                      <p className="mt-2 text-sm text-muted-foreground">{testimonial.role}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -99,15 +134,15 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div className="mt-8 px-4 sm:px-6 text-center md:hidden">
-          {!showAll && testimonials.length > 2 && (
+        <div className="mt-8 px-4 sm:px-6 text-center">
+          {!showAll && testimonials.length > 3 && (
             <Button
               variant="outline"
               size="lg"
               onClick={() => setShowAll(true)}
               className="w-full max-w-xs"
             >
-              Show More
+              Show More Testimonials
             </Button>
           )}
         </div>

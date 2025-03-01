@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -21,11 +21,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, ArrowRight } from "lucide-react";
+import useScrollToTop from "@/hooks/useScrollToTop";
+import Contact from "@/components/sections/Contact";
 
 const PricingPage = () => {
   const { t } = useTranslation();
-  type Features = typeof features;
-  type FeatureKey = keyof Features;
+
+  // Use the scroll to top hook
+  useScrollToTop();
 
   const [features, setFeatures] = useState({
     tableReservation: { enabled: true, value: 200 },
@@ -34,6 +37,9 @@ const PricingPage = () => {
     socialVerification: { enabled: false },
     valetCars: { enabled: false, value: 100 }
   });
+  
+  type Features = typeof features;
+  type FeatureKey = keyof Features;
   
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -553,18 +559,6 @@ const PricingPage = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Are there any setup fees?</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      No, there are no setup fees. You only pay for the features you enable and use.
-                      We believe in transparent pricing with no hidden costs.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
                     <CardTitle>Do you offer discounts for annual billing?</CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -578,24 +572,9 @@ const PricingPage = () => {
             </div>
           </section>
 
-          {/* CTA Section */}
-          <section className="py-12 md:py-16 bg-primary/5">
-            <div className="container mx-auto px-4 text-center">
-              <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                Join thousands of restaurants already using our platform to grow their business.
-                Start with our flexible, usage-based pricing today.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-black text-white hover:bg-gray-800 transition-colors group">
-                  Get Started
-                  <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <Button variant="outline">
-                  Contact Sales
-                </Button>
-              </div>
-            </div>
+          {/* Contact Section */}
+          <section id="contact">
+            <Contact />
           </section>
         </main>
         

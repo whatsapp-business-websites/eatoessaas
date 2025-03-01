@@ -16,8 +16,8 @@ export default function Hero() {
   ].map(url => `${url}?auto=format&fit=crop&w=300&q=80`);
 
   return (
-    <section className="min-h-screen pt-16 flex items-center bg-gradient-to-b from-background to-muted/20">
-      <div ref={ref} className="absolute inset-0 overflow-hidden">
+    <section className="min-h-screen pt-16 flex items-center bg-gradient-to-b from-background to-muted/20 relative">
+      <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-auto">
         <ImageTrail containerRef={ref}>
           {images.map((url, index) => (
             <div
@@ -34,7 +34,7 @@ export default function Hero() {
         </ImageTrail>
       </div>
 
-      <div className="container mx-auto px-6 sm:px-8 relative z-10">
+      <div className="container mx-auto px-6 sm:px-8 relative z-10 pointer-events-none">
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -48,10 +48,11 @@ export default function Hero() {
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               From WhatsApp menus to smart reservations, we've built everything you need to delight customers and boost revenue. Get started in minutes.
             </p>
-            <div className="pt-4">
+            <div className="pt-4 pointer-events-auto">
               <Button 
                 size="lg" 
                 className="bg-black text-white hover:bg-gray-800 transition-colors px-8 py-3 w-full sm:w-auto"
+                onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
               >
                 Chat Now
               </Button>

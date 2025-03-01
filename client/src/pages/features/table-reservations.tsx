@@ -23,6 +23,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import useScrollToTop from "@/hooks/useScrollToTop";
 import {
   Accordion,
   AccordionContent,
@@ -129,6 +130,9 @@ const faqs = [
 
 export default function TableReservations() {
   const { t, i18n } = useTranslation();
+  
+  // Use the scroll to top hook
+  useScrollToTop();
 
   // Set the language based on the URL path
   useEffect(() => {
@@ -228,6 +232,7 @@ export default function TableReservations() {
                     <Button 
                       size="lg" 
                       className="bg-black hover:bg-gray-800 text-white transition-colors px-8 py-3"
+                      onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
                     >
                       Chat Now
                     </Button>
@@ -551,6 +556,7 @@ export default function TableReservations() {
                   <Button 
                     size="lg" 
                     className="bg-black hover:bg-gray-800 text-white transition-colors px-8 py-3"
+                    onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
                   >
                     Chat Now
                   </Button>

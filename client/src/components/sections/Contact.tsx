@@ -12,6 +12,7 @@ export default function Contact() {
           <Button 
             size="lg" 
             className="w-full sm:max-w-xs bg-black text-white hover:bg-gray-800 transition-colors py-3"
+            onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
           >
             Chat Now
           </Button>

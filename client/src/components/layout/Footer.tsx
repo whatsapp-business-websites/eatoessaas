@@ -10,14 +10,16 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center">
-              <img 
-                src="https://connectapp.fra1.digitaloceanspaces.com/uploads/1738845376665_eatoes%20transparent%20logo%20dark.png"
-                alt="Eatoes Logo"
-                className="h-8 md:h-10 w-auto"
-                loading="lazy"
-              />
-            </div>
+            <Link href="/">
+              <a className="flex items-center" aria-label="Go to Eatoes Homepage">
+                <img 
+                  src="https://connectapp.fra1.digitaloceanspaces.com/uploads/1738845376665_eatoes%20transparent%20logo%20dark.png"
+                  alt="Eatoes Logo"
+                  className="h-8 md:h-10 w-auto"
+                  loading="lazy"
+                />
+              </a>
+            </Link>
             <p className="text-sm text-secondary-foreground">
               {t('footer.description')}
             </p>
@@ -47,16 +49,28 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-medium mb-4 text-secondary-foreground">{t('footer.quickLinks')}</h4>
+            <h2 className="font-medium mb-4 text-secondary-foreground">{t('footer.quickLinks')}</h2>
             <ul className="space-y-2 text-sm text-secondary-foreground/80">
-              <li><a href="#features" className="hover:text-primary">{t('nav.features')}</a></li>
-              <li><a href="#testimonials" className="hover:text-primary">{t('nav.testimonials')}</a></li>
-              <li><a href="#contact" className="hover:text-primary">{t('nav.contact')}</a></li>
+              <li>
+                <Link href="/#features">
+                  <a className="hover:text-primary">{t('nav.features')}</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/#testimonials">
+                  <a className="hover:text-primary">{t('nav.testimonials')}</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/#contact">
+                  <a className="hover:text-primary">{t('nav.contact')}</a>
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-medium mb-4 text-secondary-foreground">{t('footer.legal')}</h4>
+            <h2 className="font-medium mb-4 text-secondary-foreground">{t('footer.legal')}</h2>
             <ul className="space-y-2 text-sm text-secondary-foreground/80">
               <li>
                 <Link href="/privacy">

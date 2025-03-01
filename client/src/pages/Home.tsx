@@ -13,6 +13,7 @@ import Meta from "@/components/layout/Meta";
 import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import useScrollToTop from "@/hooks/useScrollToTop";
 
 // Lazy load components that aren't needed immediately
 const LazyFeatures = lazy(() => import("@/components/sections/Features"));
@@ -56,6 +57,9 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useTranslation();
+  
+  // Use the scroll to top hook
+  useScrollToTop();
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -173,6 +177,7 @@ export default function Home() {
                         >
                           <Button 
                             className="bg-black hover:bg-gray-800 text-white rounded-lg w-full py-6 text-base font-medium transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
+                            onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
                           >
                             {t('hero.cta')}
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

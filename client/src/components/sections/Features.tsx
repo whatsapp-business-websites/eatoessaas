@@ -4,6 +4,8 @@ import {
   Utensils,
   Users,
   LineChart,
+  Share2,
+  Car,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -12,28 +14,44 @@ import { useTranslation } from "react-i18next";
 
 const features = [
   {
-    icon: Utensils,
-    title: "Smart Digital Menu",
-    description: "Dynamic QR code menus with real-time updates, seasonal specials, and multilingual support. Enhance your customer's dining experience with beautiful, interactive digital menus.",
-    image: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&q=80",
+    icon: MessageSquare,
+    title: "Automate, Engage, and Convert with WhatsApp API",
+    description: "Streamline customer interactions by saving data instantly—no OTP needed. Manage queries seamlessly across Facebook, Instagram, and Google, all from one platform. Boost engagement with your verified business identity, turning ads into real-time conversations via Click-to-WhatsApp. Gain powerful insights to optimize engagement and customize the API to fit your unique needs.",
+    image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&q=80",
     cta: "Learn more",
-    link: "/en/features/digital-menu",
+    link: "/en/features/whatsapp-integration",
   },
   {
     icon: CalendarRange,
-    title: "Table Management",
-    description: "Streamline reservations and optimize seating with our intelligent booking system. Reduce no-shows and maximize your restaurant's capacity with smart scheduling.",
+    title: "Google Table Reservation",
+    description: "Streamline reservations by connecting your restaurant to Google, Instagram, Facebook, and more in just 15 minutes. Enjoy instant Google profile integration, omnichannel booking management, and a smart dashboard to handle all reservations in one place. With fast setup, reliable performance, and tools to reduce no-shows, Eatoes helps you boost bookings and customer satisfaction effortlessly.",
     image: "https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&q=80",
     cta: "Explore features",
     link: "/en/features/table-reservations",
   },
   {
-    icon: MessageSquare,
-    title: "WhatsApp Integration",
-    description: "Connect with customers directly through WhatsApp for orders and updates. Build stronger relationships and provide instant support through their preferred channel.",
-    image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&q=80",
+    icon: Utensils,
+    title: "Digital Menu",
+    description: "Transform your menu into an interactive, visually stunning experience that boosts engagement and sales. Showcase dishes with vibrant images, smart filters for Veg/Non-Veg, spice levels, and dietary preferences, and enjoy seamless auto-updates across platforms. Drive future bookings by promoting events directly on the menu. Loved by restaurants worldwide, Eatoes Digital Menu enhances customer experiences while streamlining operations.",
+    image: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&q=80",
     cta: "See how it works",
-    link: "/en/features/whatsapp-integration",
+    link: "/en/features/digital-menu",
+  },
+  {
+    icon: Share2,
+    title: "Social Profiles with Fast Social",
+    description: "Build a stunning, shareable social profile for your restaurant in minutes. Showcase your ambience, menu, reservations, events, and more—all in one place. Easily update details anytime and share your profile with a single click on WhatsApp, Instagram, and other platforms. Grow your community by engaging food lovers with updates, announcements, and exclusive posts.",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80",
+    cta: "Learn more",
+    link: "/en/features/social-profiles",
+  },
+  {
+    icon: Car,
+    title: "Smart Valet Service",
+    description: "Simplify valet services with our hassle-free system designed for restaurants, clubs, and businesses. Guests request their car via a simple interface, triggering instant WhatsApp notifications to the valet team and management. Real-time updates ensure seamless communication, while delayed actions are flagged for increased accountability. No app downloads required—just efficient, reliable service tailored for any business.",
+    image: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&q=80",
+    cta: "Explore service",
+    link: "/en/features/valet-service",
   },
 ];
 
