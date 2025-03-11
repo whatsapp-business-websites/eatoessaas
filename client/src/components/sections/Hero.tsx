@@ -46,7 +46,7 @@ export default function Hero() {
               Power Up Your Restaurant's Growth
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              From WhatsApp menus to smart reservations, we've built everything you need to delight customers and boost revenue. Get started in minutes.
+              Power up your restaurant growth - From <strong>WhatsApp digital menu</strong> to <strong>smart google table reservation</strong>. We've built everything you need to delight customer experience and boost revenue.
             </p>
             <div className="pt-4 pointer-events-auto">
               <Button 
