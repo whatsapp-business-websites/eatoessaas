@@ -24,13 +24,14 @@ import { useTranslation } from "react-i18next";
 
 // Use the same image for all features
 const featureImage = "https://www.interakt.shop/wp-content/uploads/2024/06/Group-37148-1-768x598.png";
+const newFeatureImage = "https://iili.io/3ovuzcN.png";
 
 const features = [
   {
     icon: MessageSquare,
     title: "WhatsApp API",
     description: "Streamline customer interactions by saving data instantly—no OTP needed. Manage queries seamlessly across Facebook, Instagram, and Google, all from one platform using smart chat bot.",
-    image: featureImage,
+    image: newFeatureImage,
     cta: "Learn more",
     link: "/en/features/whatsapp-integration",
   },
@@ -38,7 +39,7 @@ const features = [
     icon: CalendarRange,
     title: "Google Table Reservation",
     description: "Connect your restaurant to Google, Instagram, and Facebook in just 15 minutes. Manage all bookings from one dashboard and reduce no-shows with smart tools.",
-    image: featureImage,
+    image: newFeatureImage,
     cta: "Explore features",
     link: "/en/features/table-reservations",
   },
