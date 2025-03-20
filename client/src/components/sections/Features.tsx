@@ -23,15 +23,14 @@ import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
 
 // Use the same image for all features
-const featureImage = "https://www.interakt.shop/wp-content/uploads/2024/06/Group-37148-1-768x598.png";
-const newFeatureImage = "https://iili.io/3ovuzcN.png";
+const featureImage = "https://iili.io/3ov6xjV.png";
 
 const features = [
   {
     icon: MessageSquare,
     title: "WhatsApp API",
     description: "Streamline customer interactions by saving data instantly—no OTP needed. Manage queries seamlessly across Facebook, Instagram, and Google, all from one platform using smart chat bot.",
-    image: newFeatureImage,
+    image: featureImage,
     cta: "Learn more",
     link: "/en/features/whatsapp-integration",
   },
@@ -39,7 +38,7 @@ const features = [
     icon: CalendarRange,
     title: "Google Table Reservation",
     description: "Connect your restaurant to Google, Instagram, and Facebook in just 15 minutes. Manage all bookings from one dashboard and reduce no-shows with smart tools.",
-    image: newFeatureImage,
+    image: featureImage,
     cta: "Explore features",
     link: "/en/features/table-reservations",
   },
@@ -59,6 +58,7 @@ const features = [
     cta: "Learn more",
     link: "/en/features/social-profiles",
   },
+  /*
   {
     icon: Car,
     title: "Smart Valet Service",
@@ -67,6 +67,7 @@ const features = [
     cta: "Explore service",
     link: "/en/features/valet-service",
   },
+  */
 ];
 
 export default function Features() {
@@ -104,7 +105,7 @@ export default function Features() {
                 <img
                   src={feature.image}
                   alt={feature.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex-1 space-y-4 sm:space-y-6">

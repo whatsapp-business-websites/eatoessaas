@@ -7,66 +7,37 @@ import { VerifiedIcon, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Anjali Desai",
-    handle: "@anjalidesai",
-    role: "Co-Founder, Fusion Bites",
-    content: "Eatoes has completely transformed the way we handle table reservations. Customers can now book in seconds, and we no longer have to deal with endless phone calls. The integration with Google and social media is a game-changer!",
+    name: "Mr. Das",
+    role: "GM of Grease Monkey",
+    content: "Eatoes has completely changed how we handle table reservations. Customers can book directly from Google, and it syncs perfectly with our restaurant's system. No more missed calls or manual bookings—just smooth operations! Our staff loves it, and so do our guests.",
     rating: 5,
     verified: true
   },
   {
-    name: "Restaurant Owner",
-    handle: "@valetservice",
-    role: "Fine Dining Restaurant",
-    content: "The valet automation system has made our parking experience effortless. Our guests love the convenience, and our staff no longer have to scramble to manage requests. It's a simple yet powerful solution that we can't imagine operating without.",
+    name: "Venkat KC",
+    role: "Owner of AleHouse, C53, Boilerroom",
+    content: "From reservations to WhatsApp menu, Eatoes integrates everything seamlessly. Their fast social websites make it so easy for customers to find us and book instantly. It's like having a digital concierge for our restaurant!",
     rating: 5,
     verified: true
   },
   {
-    name: "Restaurant Manager",
-    handle: "@whatsappking",
-    role: "Restaurant Manager",
-    content: "Eatoes' WhatsApp API has helped us stay connected with customers like never before. From handling reservations to answering FAQs across multiple platforms, everything is automated yet feels personal. This has boosted our efficiency and customer satisfaction.",
+    name: "Sanya Kapoor",
+    role: "Owner of Luxe Club",
+    content: "From reservations to WhatsApp menu, Eatoes integrates everything seamlessly. Their fast social websites make it so easy for customers to find us and book instantly. It's like having a digital concierge for our restaurant!",
     rating: 5,
     verified: true
   },
   {
-    name: "Marketing Director",
-    handle: "@marketingpro",
-    role: "Marketing Director",
-    content: "Our ads weren't converting the way we wanted—until we started using Click-to-WhatsApp. Now, instead of just viewing our ads, potential customers start conversations instantly. Our sales have increased dramatically!",
+    name: "Sannith Reddy",
+    role: "Owner of OneGolf",
+    content: "Eatoes' digital menu isn't just a menu—it's a sales booster. AI-driven upselling is brilliant! We've seen a noticeable increase in add-on orders, and customers love the intuitive experience. Plus, no more reprinting menus!",
     rating: 5,
     verified: true
   },
   {
-    name: "Business Owner",
-    handle: "@datadriven",
-    role: "Restaurant Owner",
-    content: "The insights we get from Eatoes have been a game-changer. We now understand customer behavior better and can make informed decisions to grow our business.",
-    rating: 5,
-    verified: true
-  },
-  {
-    name: "New Restaurant Owner",
-    handle: "@easysetup",
-    role: "Restaurant Owner",
-    content: "Eatoes made it so easy for us to get started. No lengthy meetings, no complex setups—just a plug-and-play system that instantly enhanced our customer experience. The support team is fantastic too!",
-    rating: 5,
-    verified: true
-  },
-  {
-    name: "Social Media Manager",
-    handle: "@multiplatform",
-    role: "Restaurant Chain Manager",
-    content: "Managing customer queries across Facebook, Instagram, and Google used to be chaotic. With Eatoes, everything is centralized and automated, making customer communication smoother and more efficient than ever.",
-    rating: 5,
-    verified: true
-  },
-  {
-    name: "Restaurant Partner",
-    handle: "@growthpartner",
-    role: "F&B Business Owner",
-    content: "Eatoes doesn't just provide software; they genuinely care about helping businesses grow. Their solutions are practical, innovative, and incredibly easy to use. Highly recommended for any restaurant or F&B business!",
+    name: "Nihal Reddy Gurrala",
+    role: "Owner of Akan",
+    content: "One of the reasons we chose Eatoes was their strict data privacy policies. Unlike other platforms, they don't misuse customer data, and our guests appreciate that transparency. It builds trust, which is invaluable in hospitality.",
     rating: 5,
     verified: true
   }

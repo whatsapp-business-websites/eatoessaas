@@ -16,12 +16,21 @@ import {
   Facebook,
   Twitter,
   Smartphone,
+  ArrowRight,
+  PanelLeft,
+  BarChart3,
 } from "lucide-react";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import useScrollToTop from "@/hooks/useScrollToTop";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,11 +44,47 @@ import Meta from "@/components/layout/Meta";
 
 // Images for the page
 const images = {
-  hero: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80",
-  profile: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80",
-  sharing: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80",
-  community: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80",
+  hero: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-faststsocial-all-over-view.png",
+  profile: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-fastsocial-links.png",
+  sharing: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-fastsocial-services.png",
+  community: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Fastsocial-images.png",
+  events: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-fastsocial-events.png",
+  links: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Fast-social-links.png",
 };
+
+// How it works steps
+const howItWorksSteps = [
+  {
+    icon: Edit,
+    title: "Create Your Profile",
+    description:
+      "Set up your restaurant's profile with photos, contact details, location, and business hours. Customize the look and feel to match your brand.",
+  },
+  {
+    icon: Image,
+    title: "Add Your Content",
+    description:
+      "Upload menu items, showcase your ambiance with photos, and highlight special events or promotions that make your restaurant unique.",
+  },
+  {
+    icon: Share2,
+    title: "Share Your Profile",
+    description:
+      "Get a unique link and QR code for your profile. Share it on social media, in emails, or display it in your restaurant for customers to scan.",
+  },
+  {
+    icon: Users,
+    title: "Build Your Community",
+    description:
+      "Allow customers to follow your profile, receive updates about new menu items, events, and special promotions.",
+  },
+  {
+    icon: BarChart3,
+    title: "Track Engagement",
+    description:
+      "Monitor profile views, follower growth, and content engagement. Use insights to optimize your profile and increase customer interaction.",
+  },
+];
 
 // Features list
 const features = [
@@ -99,8 +144,18 @@ const socialPlatforms = [
   },
 ];
 
+// Benefits list
+const benefits = [
+  "Create a beautiful online presence without a website",
+  "Share your profile across all social platforms with one link",
+  "Update your information in real-time, keeping customers informed",
+  "Build a community of followers who receive your updates",
+  "Drive more reservations and orders through your profile",
+  "Track customer engagement and optimize your content",
+];
+
 // FAQ items
-const faqItems = [
+const faqs = [
   {
     question: "What is FastSocial?",
     answer: "FastSocial is a platform that allows restaurants to create beautiful, shareable social profiles without the need for a full website. It's a quick, easy way to establish your online presence and connect with customers.",
@@ -124,11 +179,40 @@ const faqItems = [
 ];
 
 export default function SocialProfiles() {
-  const { i18n, t } = useTranslation();
-  const currentLang = i18n.language;
+  const { t, i18n } = useTranslation();
   
   // Use the scroll to top hook
   useScrollToTop();
+
+  // Set the language based on the URL path
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path.startsWith("/fr")) {
+      i18n.changeLanguage("fr");
+    } else {
+      i18n.changeLanguage("en");
+    }
+  }, [i18n]);
+
+  // Structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Eatoes FastSocial Profiles",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Create beautiful, shareable social profiles for your restaurant without a website",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "680"
+    }
+  };
 
   return (
     <>
@@ -136,283 +220,384 @@ export default function SocialProfiles() {
         title="FastSocial - Restaurant Social Profiles | Eatoes"
         description="Create a beautiful, shareable social profile for your restaurant with Eatoes FastSocial. Showcase your ambience, menu, events, and more in one place."
       />
-      
-      <Navbar />
-      
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-primary/10 to-background pt-20 pb-16 md:pt-24 md:pb-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col gap-4 md:gap-8">
-              <Breadcrumb className="mb-4">
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href={currentLang === 'fr' ? '/fr' : '/'}>
-                      {t('common.home')}
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="#features">
-                      {t('common.features')}
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>Social Profiles</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
-              
-              <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-                <div className="flex flex-col justify-center space-y-4">
-                  <div className="space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                      FastSocial: Your Restaurant's Digital Identity
-                    </h1>
-                    <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                      Struggling to build a website for your restaurant? Eatoes FastSocial makes it effortless! Create a beautiful, shareable social profile in minutes.
-                    </p>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <Helmet>
+        <link rel="canonical" href="https://eatoes.com/en/features/social-profiles" />
+        <meta name="keywords" content="restaurant social profile, restaurant online presence, restaurant digital identity, restaurant marketing, restaurant social media" />
+      </Helmet>
+
+      <div className="min-h-screen">
+        <Navbar />
+        
+        <main className="pt-16">
+          {/* Breadcrumb */}
+          <div className="container mx-auto px-4 py-4">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-4 w-4" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/#features">Features</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-4 w-4" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Social Profiles</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+
+          {/* Hero Section */}
+          <section className="relative">
+            <div className="absolute inset-0 z-0">
+              <img
+                src={images.hero}
+                alt="Single page for all your business needs"
+                className="w-full h-full object-cover brightness-[0.4]"
+              />
+            </div>
+            <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
+              <div className="max-w-3xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                    FastSocial: Your Restaurant's Digital Identity
+                  </h1>
+                  <p className="text-xl text-white/80 mb-8">
+                    Streamline customer interactions by saving data instantly—no OTP needed. Manage queries seamlessly across Facebook, Instagram, and Google, all from one platform using smart chat bot.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <Button size="lg" className="gap-1.5">
+                      Get Started Free
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                    <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/20">
+                      See Examples
+                    </Button>
                   </div>
-                  <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                    <Link href="#features">
-                      <Button size="lg" className="gap-1.5">
-                        Explore Features
-                        <ChevronRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
-                    <Link href="#create-profile">
-                      <Button size="lg" variant="outline">
-                        Create Free Profile
-                      </Button>
-                    </Link>
-                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Benefits Section */}
+          <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4">Why Choose FastSocial?</h2>
+                <p className="text-muted-foreground">
+                  Our platform offers everything you need to establish a strong online presence without the hassle of building a website.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div className="bg-background rounded-xl p-8 shadow-sm">
+                  <h3 className="text-xl font-bold mb-4">Key Benefits</h3>
+                  <ul className="space-y-3">
+                    {benefits.map((benefit, index) => (
+                      <motion.li 
+                        key={index}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-start gap-2"
+                      >
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span>{benefit}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="flex justify-center lg:justify-end">
+                <div className="relative">
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="relative aspect-video overflow-hidden rounded-xl"
+                    viewport={{ once: true }}
+                    className="rounded-xl overflow-hidden h-full"
                   >
-                    <img
-                      src={images.hero}
-                      alt="Restaurant Social Profile"
-                      className="object-cover w-full h-full"
+                    <img 
+                      src={images.profile} 
+                      alt="Upload links and redirect users" 
+                      className="w-full h-full object-cover"
                     />
                   </motion.div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Features Section */}
-        <section id="features" className="py-12 md:py-16 lg:py-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Everything You Need in One Profile
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          {/* Features Section */}
+          <section id="features" className="py-12 md:py-16 lg:py-20">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4">Everything You Need in One Profile</h2>
+                <p className="text-muted-foreground">
                   FastSocial gives you all the tools you need to create a compelling online presence for your restaurant.
                 </p>
               </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="bg-background rounded-xl p-6 shadow-sm"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                      <feature.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-12">
-              {features.map((feature, index) => (
+          </section>
+
+          {/* How It Works Section */}
+          <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+            <div className="container px-4 md:px-6">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
+                How It Works
+              </h2>
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <motion.div
-                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="space-y-6"
+                >
+                  {howItWorksSteps.map((step, index) => (
+                    <div key={index} className="flex gap-4">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <step.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                        <p className="text-muted-foreground">{step.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="relative rounded-xl overflow-hidden"
+                >
+                  <img
+                    src={images.community}
+                    alt="Upload images that customers love"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Events Section */}
+          <section className="py-12 md:py-16 lg:py-20 bg-muted/20">
+            <div className="container px-4 md:px-6">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold mb-4">Upload Events and Handle From One Place</h2>
+                  <p className="text-lg text-muted-foreground mb-6">
+                    Promote your special events, theme nights, and promotions to drive more bookings and attendance. Keep your customers informed about what's happening at your restaurant.
+                  </p>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Easily create and publish events</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Set dates, times, and event details</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Track RSVPs and attendee interest</p>
+                    </div>
+                  </div>
+                  <Button className="bg-primary hover:bg-primary/90">
+                    Learn More About Events
+                  </Button>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="rounded-xl overflow-hidden shadow-xl"
+                >
+                  <img
+                    src={images.events}
+                    alt="Upload events and handle from one place"
+                    className="w-full h-auto"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Social Sharing Section */}
+          <section className="py-12 md:py-16 lg:py-20">
+            <div className="container px-4 md:px-6">
+              <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                    Share Across All Platforms
+                  </h2>
+                  <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Your FastSocial profile can be shared anywhere with just one click.
+                  </p>
+                </div>
+              </div>
+              <div className="mx-auto max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-6">
+                {socialPlatforms.map((platform, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex flex-col items-center"
+                  >
+                    <div className={`w-16 h-16 rounded-full ${platform.color} flex items-center justify-center mb-3`}>
+                      <platform.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <p className="font-medium">{platform.name}</p>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="mt-12 text-center">
+                <p className="text-muted-foreground mb-6">
+                  Your customers can follow your profile to stay updated with your latest posts, events, and announcements.
+                </p>
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="h-full">
-                    <CardContent className="p-6 flex flex-col h-full">
-                      <feature.icon className="h-10 w-10 mb-4 text-primary" />
-                      <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground flex-1">{feature.description}</p>
-                    </CardContent>
-                  </Card>
+                  <img
+                    src={images.sharing}
+                    alt="Show all services at one place"
+                    className="w-full h-auto"
+                  />
                 </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works Section */}
-        <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  How It Works
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Creating and sharing your restaurant's social profile is quick and easy.
-                </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2 items-center mt-12">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="space-y-4"
-              >
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">1. Create Your Profile</h3>
-                  <p className="text-muted-foreground">
-                    Sign up and add your restaurant's basic information, including name, location, contact details, and business hours.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">2. Add Content</h3>
-                  <p className="text-muted-foreground">
-                    Upload photos of your restaurant, dishes, and ambiance. Add your menu, upcoming events, and any special promotions.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">3. Customize & Publish</h3>
-                  <p className="text-muted-foreground">
-                    Personalize your profile's appearance to match your brand. Once you're satisfied, publish it with one click.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">4. Share & Engage</h3>
-                  <p className="text-muted-foreground">
-                    Share your profile link across social media and messaging platforms. Engage with followers through updates and announcements.
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="relative aspect-video overflow-hidden rounded-xl"
-              >
-                <img
-                  src={images.profile}
-                  alt="Restaurant Profile Creation"
-                  className="object-cover w-full h-full"
-                />
-              </motion.div>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Social Sharing Section */}
-        <section className="py-12 md:py-16 lg:py-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Share Across All Platforms
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Your FastSocial profile can be shared anywhere with just one click.
-                </p>
+          {/* FAQ Section */}
+          <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+            <div className="container px-4 md:px-6">
+              <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                    Frequently Asked Questions
+                  </h2>
+                  <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Find answers to common questions about our FastSocial profiles.
+                  </p>
+                </div>
+              </div>
+              <div className="mx-auto max-w-3xl">
+                <Accordion type="single" collapsible className="w-full">
+                  {faqs.map((faq, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-left font-medium">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-muted-foreground">{faq.answer}</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </div>
             </div>
-            <div className="mx-auto max-w-4xl mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-              {socialPlatforms.map((platform, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center"
-                >
-                  <div className={`w-16 h-16 rounded-full ${platform.color} flex items-center justify-center mb-3`}>
-                    <platform.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <p className="font-medium">{platform.name}</p>
-                </motion.div>
-              ))}
-            </div>
-            <div className="mt-12 text-center">
-              <p className="text-muted-foreground mb-6">
-                Your customers can follow your profile to stay updated with your latest posts, events, and announcements.
-              </p>
+          </section>
+
+          {/* One Link Section */}
+          <section className="py-12 md:py-16 lg:py-20 bg-muted/10">
+            <div className="container px-4 md:px-6">
+              <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                    One Link That Connects All
+                  </h2>
+                  <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Share your restaurant's profile across all platforms with a single link.
+                  </p>
+                </div>
+              </div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
+                className="mx-auto max-w-4xl"
               >
                 <img
-                  src={images.sharing}
-                  alt="Social Sharing"
-                  className="mx-auto rounded-xl max-w-full md:max-w-2xl"
+                  src={images.links}
+                  alt="One link that connects all your platforms"
+                  className="w-full h-auto rounded-xl shadow-lg"
                 />
               </motion.div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* FAQ Section */}
-        <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Frequently Asked Questions
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Find answers to common questions about our FastSocial profiles.
-                </p>
+          {/* CTA Section */}
+          <section id="create-profile" className="py-12 md:py-16 lg:py-20 bg-primary text-primary-foreground">
+            <div className="container px-4 md:px-6">
+              <div className="flex flex-col items-center justify-center space-y-4 text-center">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                    Ready to Create Your Restaurant's Social Profile?
+                  </h2>
+                  <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Join thousands of restaurants already using Eatoes FastSocial to attract more customers, drive reservations, and increase engagement.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                  <Button size="lg" variant="secondary" className="gap-1.5">
+                    Create Free Profile
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                  <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
+                    See Examples
+                  </Button>
+                </div>
               </div>
             </div>
-            <div className="mx-auto max-w-3xl mt-12 space-y-4">
-              {faqItems.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="border rounded-lg p-6 bg-background"
-                >
-                  <h3 className="text-xl font-bold mb-2">{item.question}</h3>
-                  <p className="text-muted-foreground">{item.answer}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section id="create-profile" className="py-12 md:py-16 lg:py-20 bg-primary text-primary-foreground">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Ready to Create Your Restaurant's Social Profile?
-                </h2>
-                <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Join thousands of restaurants already using Eatoes FastSocial to attract more customers, drive reservations, and increase engagement.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" variant="secondary" className="gap-1.5">
-                  Create Free Profile
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
-                  See Examples
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      
-      <Footer />
+          </section>
+        </main>
+        
+        <Footer />
+      </div>
     </>
   );
-} 
+}

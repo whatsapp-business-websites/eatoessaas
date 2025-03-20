@@ -7,17 +7,27 @@ import {
   CheckCircle2,
   ChevronRight,
   Car,
-  Smartphone,
-  Bell,
   Clock,
-  Building,
-  ShieldCheck,
+  Shield,
+  Smartphone,
+  MapPin,
+  CreditCard,
+  Users,
+  Star,
+  Award,
+  ArrowRight,
 } from "lucide-react";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import useScrollToTop from "@/hooks/useScrollToTop";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -31,424 +41,575 @@ import Meta from "@/components/layout/Meta";
 
 // Images for the page
 const images = {
-  hero: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&q=80",
-  valet: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80",
-  whatsapp: "https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?auto=format&fit=crop&q=80",
-  restaurant: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80",
+  hero: "https://images.unsplash.com/photo-1581362716668-e747e7e1c09e?auto=format&fit=crop&q=80",
+  app: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80",
+  parking: "https://images.unsplash.com/photo-1573348722427-f1d6819fdf98?auto=format&fit=crop&q=80",
+  restaurant: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80",
 };
 
 // Features list
 const features = [
   {
-    icon: Smartphone,
-    title: "No App Required",
-    description: "Operates directly through WhatsApp, eliminating the need for customers to download any additional apps.",
-  },
-  {
-    icon: Bell,
-    title: "Real-Time Alerts",
-    description: "Instant notifications for both valet teams and management, ensuring smooth and efficient service.",
+    icon: Car,
+    title: "Seamless Valet Experience",
+    description: "Offer your guests a premium valet service that enhances their dining experience from the moment they arrive. Our system streamlines the entire process from drop-off to pick-up.",
   },
   {
     icon: Clock,
-    title: "Increased Accountability",
-    description: "Alerts managers when actions are delayed, maintaining high service standards and customer satisfaction.",
+    title: "Reduced Wait Times",
+    description: "Minimize guest wait times with our efficient valet management system. Guests can request their vehicle through the app before they're ready to leave, ensuring their car is waiting for them.",
   },
   {
-    icon: Building,
-    title: "Perfect for All Businesses",
-    description: "Ideal for restaurants, clubs, hotels, and more—adaptable to any business with valet parking needs.",
-  },
-  {
-    icon: ShieldCheck,
+    icon: Shield,
     title: "Enhanced Security",
-    description: "Improved tracking and accountability for vehicle handling, reducing risks and increasing customer trust.",
+    description: "Our digital ticketing system provides enhanced security with unique QR codes for each vehicle, reducing the risk of lost tickets and unauthorized vehicle retrievals.",
   },
   {
-    icon: Car,
-    title: "Streamlined Operations",
-    description: "Simplifies valet management, reducing wait times and improving the overall customer experience.",
+    icon: Smartphone,
+    title: "Mobile App Integration",
+    description: "Allow guests to manage their valet experience directly from their smartphone. They can request their vehicle, pay for valet services, and receive real-time updates on vehicle status.",
+  },
+  {
+    icon: MapPin,
+    title: "GPS Vehicle Tracking",
+    description: "Valet staff can quickly locate vehicles in large parking areas using our GPS tracking feature, reducing retrieval times and improving operational efficiency.",
+  },
+  {
+    icon: CreditCard,
+    title: "Integrated Payment Processing",
+    description: "Offer seamless payment options for valet services directly through the app or at designated payment stations, eliminating the need for cash transactions.",
   },
 ];
 
-// Business types
-const businessTypes = [
+// How it works steps
+const howItWorksSteps = [
   {
-    name: "Restaurants",
-    icon: "🍽️",
+    icon: Car,
+    title: "Guest Arrival",
+    description:
+      "When guests arrive, the valet attendant uses the app to scan the vehicle and generate a digital ticket with a unique QR code that is sent to the guest's phone.",
   },
   {
-    name: "Hotels",
-    icon: "🏨",
+    icon: MapPin,
+    title: "Vehicle Parking",
+    description:
+      "The valet parks the vehicle and marks its location in the system, making it easy to locate when the guest is ready to leave.",
   },
   {
-    name: "Clubs",
-    icon: "🎵",
+    icon: Smartphone,
+    title: "Vehicle Request",
+    description:
+      "Guests can request their vehicle through the app or at the valet stand. The system notifies the valet team to retrieve the vehicle.",
   },
   {
-    name: "Event Venues",
-    icon: "🎭",
+    icon: Clock,
+    title: "Vehicle Retrieval",
+    description:
+      "The valet team retrieves the vehicle and brings it to the designated pick-up area. The guest receives a notification when their vehicle is ready.",
   },
   {
-    name: "Shopping Centers",
-    icon: "🛍️",
+    icon: CreditCard,
+    title: "Payment & Departure",
+    description:
+      "Guests can pay for the valet service through the app or at the valet stand. Once payment is confirmed, they can depart with their vehicle.",
   },
-  {
-    name: "Corporate Buildings",
-    icon: "🏢",
-  },
+];
+
+// Benefits of valet service
+const benefits = [
+  "Enhance guest experience with premium valet service",
+  "Reduce operational costs with efficient staff management",
+  "Increase security with digital ticketing system",
+  "Improve guest satisfaction with reduced wait times",
+  "Generate additional revenue stream for your restaurant",
+  "Collect valuable data on guest arrival and departure patterns",
 ];
 
 // FAQ items
 const faqItems = [
   {
-    question: "How does the valet service work without an app?",
-    answer: "Our valet service operates through WhatsApp, which most customers already have installed. When customers want their car, they can request it through a simple interface, which triggers a WhatsApp notification to the valet team. The team then sends a notification back when the car is ready.",
+    question: "How does the digital valet system work?",
+    answer: "Our digital valet system replaces traditional paper tickets with a mobile app. When guests arrive, the valet attendant uses the app to scan the vehicle and generate a digital ticket with a unique QR code. This ticket is sent to the guest's phone, where they can use it to request their vehicle when they're ready to leave.",
   },
   {
-    question: "Is the system difficult to implement for my business?",
-    answer: "Not at all. Our system is designed for easy implementation with minimal setup. We provide all the necessary training and support to get your team up and running quickly.",
+    question: "Can guests pay for valet service through the app?",
+    answer: "Yes, guests can pay for valet service directly through the app using various payment methods including credit cards, mobile wallets, and even integration with their restaurant bill if desired.",
   },
   {
-    question: "How does the accountability feature work?",
-    answer: "The system automatically tracks the time between a customer's request and when their car is delivered. If there's a delay beyond a customizable threshold, managers receive alerts, allowing them to address issues promptly and maintain service standards.",
+    question: "How does the system reduce wait times?",
+    answer: "The system allows guests to request their vehicle before they're ready to leave, giving the valet team advance notice to retrieve the vehicle. This significantly reduces wait times, especially during peak hours.",
   },
   {
-    question: "Can I customize the system for my specific business needs?",
-    answer: "Yes, our valet service is highly customizable. We can adapt the system to fit your specific operational requirements, branding, and customer experience goals.",
+    question: "Is the system secure?",
+    answer: "Yes, our system uses unique QR codes for each vehicle and requires verification before vehicle retrieval. This significantly reduces the risk of lost tickets and unauthorized vehicle retrievals.",
   },
   {
-    question: "How secure is the WhatsApp integration?",
-    answer: "WhatsApp provides end-to-end encryption for all communications, ensuring that customer information remains secure. Our system also includes additional security measures to protect customer data and privacy.",
+    question: "How difficult is it to implement the valet system?",
+    answer: "Our team handles the entire implementation process, from system setup to staff training. The system is designed to be user-friendly and intuitive, requiring minimal training for both staff and guests.",
+  },
+  {
+    question: "Can the valet system be customized for my restaurant?",
+    answer: "Absolutely. We can customize the valet system to match your restaurant's branding and specific operational requirements. This includes custom ticketing, payment options, and integration with your existing systems.",
   },
 ];
 
 export default function ValetService() {
   const { i18n, t } = useTranslation();
-  const currentLang = i18n.language;
   
   // Use the scroll to top hook
   useScrollToTop();
 
+  // Set the language based on the URL path
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path.startsWith("/fr")) {
+      i18n.changeLanguage("fr");
+    } else {
+      i18n.changeLanguage("en");
+    }
+  }, [i18n]);
+
+  // Structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Eatoes Valet Service Management",
+    "serviceType": "Restaurant Valet Service",
+    "description": "Premium digital valet service management system for restaurants to enhance guest experience and streamline operations",
+    "provider": {
+      "@type": "Organization",
+      "name": "Eatoes"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Global"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Valet Service Solutions",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Digital Valet Management"
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <>
-      <Meta 
-        title="Restaurant Valet Tech | Eatoes"
-        description="Simplify valet operations with Eatoes Valet Service. No app required, just WhatsApp. Real-time alerts, increased accountability, and perfect for all businesses."
+      <Meta
+        title="Digital Valet Service Management for Restaurants | Eatoes"
+        description="Enhance your restaurant's guest experience with our premium digital valet service management system. Reduce wait times, improve security, and streamline operations."
       />
-      
-      <Navbar />
-      
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-primary/10 to-background pt-20 pb-16 md:pt-24 md:pb-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col gap-4 md:gap-8">
-              <Breadcrumb className="mb-4">
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href={currentLang === 'fr' ? '/fr' : '/'}>
-                      {t('common.home')}
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="#features">
-                      {t('common.features')}
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>Valet Service</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
-              
-              <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-                <div className="flex flex-col justify-center space-y-4">
-                  <div className="space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                      Restaurant Valet Tech
-                    </h1>
-                    <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                      Simplify Valet Operations - No App Required. Just WhatsApp.
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                    <Link href="#features">
-                      <Button size="lg" className="gap-1.5">
-                        Explore Features
-                        <ChevronRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
-                    <Link href="#contact">
-                      <Button size="lg" variant="outline">
-                        Contact Sales
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex justify-center lg:justify-end">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative aspect-video overflow-hidden rounded-xl"
-                  >
-                    <img
-                      src={images.hero}
-                      alt="Valet Service"
-                      className="object-cover w-full h-full"
-                    />
-                  </motion.div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <Helmet>
+        <link rel="canonical" href="https://eatoes.com/en/features/valet-service" />
+        <meta name="keywords" content="restaurant valet service, digital valet management, valet app, restaurant parking management, premium dining experience" />
+      </Helmet>
 
-        {/* Features Section */}
-        <section id="features" className="py-12 md:py-16 lg:py-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Key Features of Our Valet Service
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  We understand that managing valet services should be smooth, efficient, and hassle-free.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-12">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="h-full">
-                    <CardContent className="p-6 flex flex-col h-full">
-                      <feature.icon className="h-10 w-10 mb-4 text-primary" />
-                      <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground flex-1">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works Section */}
-        <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  How It Works
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Our cutting-edge valet management system is designed for businesses that want to offer their guests a seamless experience.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2 items-center mt-12">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="space-y-4"
-              >
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">1. Guest Requests Their Car</h3>
-                  <p className="text-muted-foreground">
-                    Guests request their car through a simple interface, which can be accessed via QR code or a link provided by your staff.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">2. Instant WhatsApp Notification</h3>
-                  <p className="text-muted-foreground">
-                    The valet team receives an immediate WhatsApp notification with the guest's information and car details.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">3. Car Retrieval</h3>
-                  <p className="text-muted-foreground">
-                    The valet team retrieves the car and marks the request as in progress, keeping the guest informed.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold">4. Notification When Car Arrives</h3>
-                  <p className="text-muted-foreground">
-                    The team sends a notification to the guest when their car is ready, providing a seamless and efficient experience.
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="relative aspect-video overflow-hidden rounded-xl"
-              >
-                <img
-                  src={images.valet}
-                  alt="Valet Service in Action"
-                  className="object-cover w-full h-full"
-                />
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Business Types Section */}
-        <section className="py-12 md:py-16 lg:py-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Perfect for All Businesses
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Our valet service is ideal for a wide range of businesses that want to enhance their customer experience.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto max-w-4xl mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
-              {businessTypes.map((business, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center p-6 rounded-lg bg-muted/20"
-                >
-                  <div className="text-4xl mb-3">{business.icon}</div>
-                  <h3 className="text-xl font-bold">{business.name}</h3>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* WhatsApp Integration Section */}
-        <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="space-y-4"
-              >
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                    WhatsApp Integration
-                  </h2>
-                  <p className="text-muted-foreground text-lg">
-                    Our valet service leverages the power of WhatsApp, the world's most popular messaging app, to provide a seamless experience for both guests and staff.
-                  </p>
-                  <ul className="space-y-2 mt-4">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                      <span>No additional app downloads required</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                      <span>Instant notifications for quick service</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                      <span>Secure and reliable communication</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                      <span>Works on any smartphone</span>
-                    </li>
-                  </ul>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="relative aspect-square md:aspect-video overflow-hidden rounded-xl"
-              >
-                <img
-                  src={images.whatsapp}
-                  alt="WhatsApp Integration"
-                  className="object-cover w-full h-full"
-                />
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-12 md:py-16 lg:py-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Frequently Asked Questions
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Find answers to common questions about our valet service.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto max-w-3xl mt-12 space-y-4">
-              {faqItems.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="border rounded-lg p-6"
-                >
-                  <h3 className="text-xl font-bold mb-2">{item.question}</h3>
-                  <p className="text-muted-foreground">{item.answer}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section id="contact" className="py-12 md:py-16 lg:py-20 bg-primary text-primary-foreground">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Ready to Transform Your Valet Service?
-                </h2>
-                <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Contact our team today to learn how our valet service can enhance your customer experience.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" variant="secondary" className="gap-1.5">
-                  Get Started
+      <div className="min-h-screen">
+        <Navbar />
+        
+        <main className="pt-16">
+          {/* Breadcrumb */}
+          <div className="container mx-auto px-4 py-4">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
                   <ChevronRight className="h-4 w-4" />
-                </Button>
-                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
-                  Schedule a Demo
-                </Button>
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/#features">Features</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-4 w-4" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Valet Service</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+
+          {/* Hero Section */}
+          <section className="relative">
+            <div className="absolute inset-0 z-0">
+              <img
+                src={images.hero}
+                alt="Luxury valet service for restaurant"
+                className="w-full h-full object-cover brightness-[0.4]"
+              />
+            </div>
+            <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
+              <div className="max-w-3xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                    Digital Valet Service Management
+                  </h1>
+                  <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+                    Elevate your restaurant's guest experience with our premium digital valet service management system.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <Button 
+                      size="lg" 
+                      className="bg-black hover:bg-gray-800 text-white transition-colors px-8 py-3"
+                      onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
+                    >
+                      Chat Now
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      className="bg-white text-black border-white hover:bg-white/90 transition-colors"
+                    >
+                      Schedule Demo
+                    </Button>
+                  </div>
+                </motion.div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
-      
-      <Footer />
+          </section>
+
+          {/* Key Benefits Section */}
+          <section className="py-16 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4">Transform Your Guest Experience</h2>
+                <p className="text-lg text-muted-foreground">
+                  Our digital valet service management system helps you provide a premium experience for your guests while streamlining operations.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="space-y-4"
+                >
+                  {benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-6 w-6 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p className="text-base">{benefit}</p>
+                    </div>
+                  ))}
+                  <div className="pt-4">
+                    <Button className="bg-black text-white hover:bg-gray-800">
+                      Learn More About Benefits
+                    </Button>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="rounded-xl overflow-hidden shadow-xl"
+                >
+                  <img
+                    src={images.parking}
+                    alt="Valet parking service"
+                    className="w-full h-auto"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* How It Works Section */}
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4">How It Works</h2>
+                <p className="text-lg text-muted-foreground">
+                  Our intuitive system makes managing valet services effortless for your restaurant.
+                </p>
+              </div>
+
+              <div className="space-y-12 max-w-4xl mx-auto">
+                {howItWorksSteps.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex flex-col md:flex-row gap-6 items-start"
+                  >
+                    <div className="bg-primary/10 p-4 rounded-full">
+                      <step.icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                      <p className="text-muted-foreground">{step.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Feature Showcase Section */}
+          <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+            <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold mb-4">Seamless Mobile Experience</h2>
+                  <p className="text-lg text-muted-foreground mb-6">
+                    Our mobile app integration allows guests to manage their valet experience directly from their smartphone, enhancing convenience and satisfaction.
+                  </p>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Request vehicle retrieval with a single tap</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Receive real-time updates on vehicle status</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Pay for valet service directly through the app</p>
+                    </div>
+                  </div>
+                  <Button className="bg-primary hover:bg-primary/90">
+                    Explore Mobile Features
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="rounded-xl overflow-hidden shadow-xl"
+                >
+                  <img
+                    src={images.app}
+                    alt="Valet service mobile app"
+                    className="w-full h-auto"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Restaurant Integration Section */}
+          <section className="py-16 bg-muted/20">
+            <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="order-2 md:order-1 rounded-xl overflow-hidden shadow-xl"
+                >
+                  <img
+                    src={images.restaurant}
+                    alt="Restaurant integration with valet service"
+                    className="w-full h-auto"
+                  />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="order-1 md:order-2"
+                >
+                  <h2 className="text-3xl font-bold mb-4">Seamless Restaurant Integration</h2>
+                  <p className="text-lg text-muted-foreground mb-6">
+                    Our valet service management system integrates seamlessly with your restaurant operations, allowing for a cohesive guest experience from arrival to departure.
+                  </p>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Integrate valet charges with restaurant bill</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Notify staff when VIP guests arrive</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Coordinate vehicle retrieval with meal completion</p>
+                    </div>
+                  </div>
+                  <Button className="bg-primary hover:bg-primary/90">
+                    Explore Integration Options
+                  </Button>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Testimonial Section */}
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4">What Our Customers Say</h2>
+                <p className="text-lg text-muted-foreground">
+                  Join hundreds of restaurants already using our digital valet service management system.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <Card className="bg-muted/10">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="mb-4 italic">
+                      "The digital valet system has completely transformed our guest experience. Wait times have been reduced by 70% and our guests love the convenience of the mobile app."
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
+                        JD
+                      </div>
+                      <div>
+                        <p className="font-semibold">John Doherty</p>
+                        <p className="text-sm text-muted-foreground">Owner, The Capital Grille</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-muted/10">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="mb-4 italic">
+                      "The operational efficiency of our valet service has improved dramatically. We're able to handle 30% more vehicles with the same staff, and the digital ticketing system has eliminated lost ticket issues."
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
+                        LM
+                      </div>
+                      <div>
+                        <p className="font-semibold">Lisa Martinez</p>
+                        <p className="text-sm text-muted-foreground">Manager, Ocean Prime</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-muted/10">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="mb-4 italic">
+                      "The integration with our restaurant operations has been seamless. Our guests appreciate the ability to pay for valet service with their meal, and our staff can coordinate vehicle retrieval with meal completion."
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
+                        RK
+                      </div>
+                      <div>
+                        <p className="font-semibold">Robert Kim</p>
+                        <p className="text-sm text-muted-foreground">Owner, Nobu</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section className="py-16 bg-muted/10">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p className="text-lg text-muted-foreground">
+                  Everything you need to know about our digital valet service management system.
+                </p>
+              </div>
+
+              <div className="max-w-3xl mx-auto">
+                <Accordion type="single" collapsible className="w-full">
+                  {faqItems.map((faq, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-left font-medium">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="py-16 bg-primary/10">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center">
+                <h2 className="text-3xl font-bold mb-4">Ready to Elevate Your Guest Experience?</h2>
+                <p className="text-lg mb-8">
+                  Join over 150 restaurants already using Eatoes Digital Valet Service Management to enhance their guest experience and streamline operations.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <Button 
+                    size="lg" 
+                    className="bg-black hover:bg-gray-800 text-white transition-colors px-8 py-3"
+                    onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
+                  >
+                    Chat Now
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-gray-300 hover:bg-gray-100 transition-colors"
+                  >
+                    Schedule a Demo
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+      </div>
     </>
   );
-} 
+}

@@ -232,7 +232,7 @@ export default function TableReservations() {
                     <Button 
                       size="lg" 
                       className="bg-black hover:bg-gray-800 text-white transition-colors px-8 py-3"
-                      onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
+                      onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
                     >
                       Chat Now
                     </Button>
@@ -556,7 +556,7 @@ export default function TableReservations() {
                   <Button 
                     size="lg" 
                     className="bg-black hover:bg-gray-800 text-white transition-colors px-8 py-3"
-                    onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
+                    onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
                   >
                     Chat Now
                   </Button>

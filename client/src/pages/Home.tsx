@@ -19,7 +19,7 @@ import useScrollToTop from "@/hooks/useScrollToTop";
 const LazyFeatures = lazy(() => import("@/components/sections/Features"));
 const LazyClients = lazy(() => import("@/components/sections/Clients"));
 const LazyTestimonials = lazy(() => import("@/components/sections/Testimonials"));
-const LazyBlog = lazy(() => import("@/components/ui/blog-section").then(module => ({ default: module.Blog })));
+// const LazyBlog = lazy(() => import("@/components/ui/blog-section").then(module => ({ default: module.Blog })));
 const LazyContact = lazy(() => import("@/components/sections/Contact"));
 
 // Client logos for the hero section
@@ -177,7 +177,7 @@ export default function Home() {
                         >
                           <Button 
                             className="bg-black hover:bg-gray-800 text-white rounded-lg w-full py-6 text-base font-medium transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
-                            onClick={() => window.open('https://bit.ly/eatoeswebsite', '_blank')}
+                            onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
                           >
                             {t('hero.cta')}
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -250,7 +250,7 @@ export default function Home() {
                 <Features />
                 <Clients />
                 <Testimonials />
-                <Blog />
+                {/* <Blog /> */}
                 <Contact />
               </>
             ) : (
@@ -258,7 +258,7 @@ export default function Home() {
                 <LazyFeatures />
                 <LazyClients />
                 <LazyTestimonials />
-                <LazyBlog />
+                {/* <LazyBlog /> */}
                 <LazyContact />
               </>
             )}

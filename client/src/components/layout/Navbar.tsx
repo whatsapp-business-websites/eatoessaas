@@ -60,14 +60,6 @@ export default function Navbar() {
       href: isHomePage ? "#features" : "/#features" 
     },
     { 
-      label: t('nav.testimonials'), 
-      href: isHomePage ? "#testimonials" : "/#testimonials" 
-    },
-    { 
-      label: t('nav.contact'), 
-      href: isHomePage ? "#contact" : "/#contact" 
-    },
-    { 
       label: t('nav.pricing') || 'Pricing', 
       href: "/pricing" 
     },
@@ -132,7 +124,7 @@ export default function Navbar() {
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent className="transition-transform duration-300 ease-in-out">
             <div className="flex flex-col gap-4 pt-8">
               {navItems.map((item) => (
                 item.href.startsWith('#') || item.href.includes('/#') ? (
