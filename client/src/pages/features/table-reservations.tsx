@@ -236,13 +236,6 @@ export default function TableReservations() {
                     >
                       Chat Now
                     </Button>
-                    <Button 
-                      size="lg" 
-                      variant="outline" 
-                      className="bg-white text-black border-white hover:bg-white/90 transition-colors"
-                    >
-                      Schedule Demo
-                    </Button>
                   </div>
                 </motion.div>
               </div>
@@ -431,92 +424,6 @@ export default function TableReservations() {
             </div>
           </section>
 
-          {/* Testimonial Section */}
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="max-w-3xl mx-auto text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">What Our Customers Say</h2>
-                <p className="text-lg text-muted-foreground">
-                  Join hundreds of restaurants already using our table reservation system.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Card className="bg-muted/10">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="mb-4 italic">
-                      "Since implementing Eatoes' reservation system, our no-show rate has dropped by 40%. The automated reminders have been a game-changer for our business."
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
-                        JD
-                      </div>
-                      <div>
-                        <p className="font-semibold">John Doe</p>
-                        <p className="text-sm text-muted-foreground">Owner, Fusion Restaurant</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-muted/10">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="mb-4 italic">
-                      "The analytics feature has helped us identify our peak hours and optimize our staffing accordingly. We've seen a 15% increase in revenue since using Eatoes."
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
-                        AS
-                      </div>
-                      <div>
-                        <p className="font-semibold">Alice Smith</p>
-                        <p className="text-sm text-muted-foreground">Manager, Bistro Central</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-muted/10">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="mb-4 italic">
-                      "Our customers love the ease of booking through our website. The integration with our digital menu system creates a seamless experience from reservation to ordering."
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
-                        RJ
-                      </div>
-                      <div>
-                        <p className="font-semibold">Robert Johnson</p>
-                        <p className="text-sm text-muted-foreground">Owner, Seaside Grill</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </section>
-
           {/* FAQ Section */}
           <section className="py-16 bg-muted/10">
             <div className="container mx-auto px-4">
@@ -559,13 +466,6 @@ export default function TableReservations() {
                     onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
                   >
                     Chat Now
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="border-gray-300 hover:bg-gray-100 transition-colors"
-                  >
-                    Schedule a Demo
                   </Button>
                 </div>
               </div>

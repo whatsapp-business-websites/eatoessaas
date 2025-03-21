@@ -271,13 +271,6 @@ export default function ValetService() {
                     >
                       Chat Now
                     </Button>
-                    <Button 
-                      size="lg" 
-                      variant="outline" 
-                      className="bg-white text-black border-white hover:bg-white/90 transition-colors"
-                    >
-                      Schedule Demo
-                    </Button>
                   </div>
                 </motion.div>
               </div>
@@ -325,7 +318,7 @@ export default function ValetService() {
                   <img
                     src={images.parking}
                     alt="Valet parking service"
-                    className="w-full h-auto"
+                    className="w-full h-full object-cover"
                   />
                 </motion.div>
               </div>
@@ -408,7 +401,7 @@ export default function ValetService() {
                   <img
                     src={images.app}
                     alt="Valet service mobile app"
-                    className="w-full h-auto"
+                    className="w-full h-full object-cover"
                   />
                 </motion.div>
               </div>
@@ -429,7 +422,7 @@ export default function ValetService() {
                   <img
                     src={images.restaurant}
                     alt="Restaurant integration with valet service"
-                    className="w-full h-auto"
+                    className="w-full h-full object-cover"
                   />
                 </motion.div>
 
@@ -462,92 +455,6 @@ export default function ValetService() {
                     Explore Integration Options
                   </Button>
                 </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Testimonial Section */}
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="max-w-3xl mx-auto text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">What Our Customers Say</h2>
-                <p className="text-lg text-muted-foreground">
-                  Join hundreds of restaurants already using our digital valet service management system.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Card className="bg-muted/10">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="mb-4 italic">
-                      "The digital valet system has completely transformed our guest experience. Wait times have been reduced by 70% and our guests love the convenience of the mobile app."
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
-                        JD
-                      </div>
-                      <div>
-                        <p className="font-semibold">John Doherty</p>
-                        <p className="text-sm text-muted-foreground">Owner, The Capital Grille</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-muted/10">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="mb-4 italic">
-                      "The operational efficiency of our valet service has improved dramatically. We're able to handle 30% more vehicles with the same staff, and the digital ticketing system has eliminated lost ticket issues."
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
-                        LM
-                      </div>
-                      <div>
-                        <p className="font-semibold">Lisa Martinez</p>
-                        <p className="text-sm text-muted-foreground">Manager, Ocean Prime</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-muted/10">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="mb-4 italic">
-                      "The integration with our restaurant operations has been seamless. Our guests appreciate the ability to pay for valet service with their meal, and our staff can coordinate vehicle retrieval with meal completion."
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
-                        RK
-                      </div>
-                      <div>
-                        <p className="font-semibold">Robert Kim</p>
-                        <p className="text-sm text-muted-foreground">Owner, Nobu</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
             </div>
           </section>
@@ -594,13 +501,6 @@ export default function ValetService() {
                     onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
                   >
                     Chat Now
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="border-gray-300 hover:bg-gray-100 transition-colors"
-                  >
-                    Schedule a Demo
                   </Button>
                 </div>
               </div>

@@ -124,7 +124,7 @@ export default function Navbar() {
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent className="transition-transform duration-300 ease-in-out">
+          <SheetContent className="transition-transform duration-300 ease-in-out" side="right">
             <div className="flex flex-col gap-4 pt-8">
               {navItems.map((item) => (
                 item.href.startsWith('#') || item.href.includes('/#') ? (

@@ -22,15 +22,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
 
-// Use the same image for all features
-const featureImage = "https://iili.io/3ov6xjV.png";
-
 const features = [
   {
     icon: MessageSquare,
     title: "WhatsApp API",
     description: "Streamline customer interactions by saving data instantly—no OTP needed. Manage queries seamlessly across Facebook, Instagram, and Google, all from one platform using smart chat bot.",
-    image: featureImage,
+    image: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Whatsapp-api-broadcast.png",
     cta: "Learn more",
     link: "/en/features/whatsapp-integration",
   },
@@ -38,23 +35,23 @@ const features = [
     icon: CalendarRange,
     title: "Google Table Reservation",
     description: "Connect your restaurant to Google, Instagram, and Facebook in just 15 minutes. Manage all bookings from one dashboard and reduce no-shows with smart tools.",
-    image: featureImage,
-    cta: "Explore features",
+    image: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Table-Reservation-google-and-google-maps-integration.png",
+    cta: "Learn more",
     link: "/en/features/table-reservations",
   },
   {
     icon: Utensils,
     title: "Digital Menu",
     description: "Create interactive, visual menus with smart filters for dietary preferences. Auto-update across platforms and promote events directly on the menu.",
-    image: featureImage,
-    cta: "See how it works",
+    image: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-digital-menu-all-over-view.png",
+    cta: "Learn more",
     link: "/en/features/digital-menu",
   },
   {
     icon: Share2,
     title: "Social Profiles with Fast Social",
     description: "Build a shareable profile for your restaurant in minutes. Showcase menu, reservations, and events in one place. Share instantly on WhatsApp and Instagram.",
-    image: featureImage,
+    image: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-faststsocial-all-over-view.png",
     cta: "Learn more",
     link: "/en/features/social-profiles",
   },
@@ -120,22 +117,6 @@ export default function Features() {
                       {feature.cta}
                     </Button>
                   </Link>
-                  
-                  {/* Additional CTAs for WhatsApp API feature */}
-                  {index === 0 && (
-                    <>
-                      <Link href="#contact">
-                        <Button variant="default" size="lg" className="w-full sm:w-auto">
-                          Contact now
-                        </Button>
-                      </Link>
-                      <Link href="#demo">
-                        <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                          See live demo
-                        </Button>
-                      </Link>
-                    </>
-                  )}
                 </div>
               </div>
             </motion.div>

@@ -264,8 +264,9 @@ export default function SocialProfiles() {
                 alt="Single page for all your business needs"
                 className="w-full h-full object-cover brightness-[0.4]"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 z-10"></div>
             </div>
-            <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
+            <div className="relative z-20 container mx-auto px-4 py-20 md:py-32">
               <div className="max-w-3xl">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -279,12 +280,12 @@ export default function SocialProfiles() {
                     Streamline customer interactions by saving data instantly—no OTP needed. Manage queries seamlessly across Facebook, Instagram, and Google, all from one platform using smart chat bot.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Button size="lg" className="gap-1.5">
-                      Get Started Free
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                    <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/20">
-                      See Examples
+                    <Button 
+                      size="lg" 
+                      className="bg-white hover:bg-white/90 text-black transition-colors px-8 py-3 font-medium"
+                      onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
+                    >
+                      Chat Now
                     </Button>
                   </div>
                 </motion.div>
@@ -578,17 +579,15 @@ export default function SocialProfiles() {
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                     Ready to Create Your Restaurant's Social Profile?
                   </h2>
-                  <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Join thousands of restaurants already using Eatoes FastSocial to attract more customers, drive reservations, and increase engagement.
-                  </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" variant="secondary" className="gap-1.5">
-                    Create Free Profile
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                  <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
-                    See Examples
+                  <Button 
+                    size="lg" 
+                    variant="secondary" 
+                    className="gap-1.5"
+                    onClick={() => window.open('https://wa.me/919634339954/?text=Hey!%20I%20want%20to%20know%20more%20about%20eatoes%20services.', '_blank')}
+                  >
+                    Chat Now
                   </Button>
                 </div>
               </div>
