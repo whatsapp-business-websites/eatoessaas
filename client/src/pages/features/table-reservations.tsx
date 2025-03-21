@@ -44,10 +44,11 @@ import Meta from "@/components/layout/Meta";
 // Images for the page
 const images = {
   hero: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80",
-  dashboard: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80",
-  mobile: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80",
-  tablet: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80",
-  customerView: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80",
+  dashboard: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Table-Reservation-booking-manager.png",
+  mobile: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Table-Reservation-slots-manager.png",
+  tablet: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Table-Reservation-walkin.png",
+  customerView: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-Table-Reservation-whatsapp-notification.png",
+  links: "https://connectapp.fra1.cdn.digitaloceanspaces.com/eatoes-website/eatoes-table-reservation-links.png",
 };
 
 // How it works steps
@@ -419,6 +420,56 @@ export default function TableReservations() {
                   <Button className="bg-primary hover:bg-primary/90">
                     Explore Management Features
                   </Button>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Analytics and Links Section */}
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold mb-4">Upload Links and Analyze Traffic</h2>
+                  <p className="text-lg text-muted-foreground mb-6">
+                    Easily upload custom links and track how customers interact with your reservation system. Gain valuable insights into user behavior to optimize your booking experience.
+                  </p>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Track customer engagement with your booking links</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Analyze traffic patterns and conversion rates</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <p>Customize links for different campaigns or platforms</p>
+                    </div>
+                  </div>
+                  <Button className="bg-primary hover:bg-primary/90">
+                    Explore Analytics Features
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="rounded-xl overflow-hidden shadow-xl"
+                >
+                  <img
+                    src={images.links}
+                    alt="Analytics dashboard showing reservation link performance"
+                    className="w-full h-auto"
+                  />
                 </motion.div>
               </div>
             </div>

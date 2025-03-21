@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -117,55 +118,57 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="p-2">
-              <Menu className="h-10 w-10" aria-hidden="true" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent className="transition-transform duration-300 ease-in-out" side="right">
-            <div className="flex flex-col gap-4 pt-8">
-              {navItems.map((item) => (
-                item.href.startsWith('#') || item.href.includes('/#') ? (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                    onClick={(e) => {
-                      handleHashLinkClick(e, item.href);
-                      setIsOpen(false);
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link key={item.href} href={item.href}>
-                    <a 
+        <div className="md:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="p-2">
+                <Menu className="h-10 w-10" aria-hidden="true" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="!bg-white w-[75%] max-w-sm" style={{ backgroundColor: '#FFFFFF' }}>
+              <div className="flex flex-col gap-4 mt-6">
+                {navItems.map((item) => (
+                  item.href.startsWith('#') || item.href.includes('/#') ? (
+                    <a
+                      key={item.href}
+                      href={item.href}
                       className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => {
+                        handleHashLinkClick(e, item.href);
+                        setIsOpen(false);
+                      }}
                     >
                       {item.label}
                     </a>
-                  </Link>
-                )
-              ))}
-              <Link href="/auth">
-                <a className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-300 hover:bg-gray-100 w-full h-10 px-4 py-2">
-                  Login/Signup
+                  ) : (
+                    <Link key={item.href} href={item.href}>
+                      <a 
+                        className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    </Link>
+                  )
+                ))}
+                <Link href="/auth">
+                  <a className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-300 hover:bg-gray-100 w-full h-10 px-4 py-2 mt-2">
+                    Login/Signup
+                  </a>
+                </Link>
+                <a 
+                  href="https://bit.ly/eatoeswebsite"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 w-full h-10 px-4 py-2 mt-2"
+                >
+                  Chat Now
                 </a>
-              </Link>
-              <a 
-                href="https://bit.ly/eatoeswebsite"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 w-full h-10 px-4 py-2"
-              >
-                Chat Now
-              </a>
-            </div>
-          </SheetContent>
-        </Sheet>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </nav>
   );
