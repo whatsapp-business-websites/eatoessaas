@@ -3,6 +3,7 @@ import Home from "@/pages/Home";
 import Terms from "@/pages/Terms";
 import Privacy from "@/pages/Privacy";
 import Pricing from "@/pages/Pricing";
+import Menu from "@/pages/Menu";
 import TableReservations from "@/pages/features/table-reservations";
 import WhatsAppIntegration from "@/pages/features/whatsapp-integration";
 import DigitalMenu from "@/pages/features/digital-menu";
@@ -40,6 +41,10 @@ export default function Routes() {
       <Route path="/fr/privacy" component={Privacy} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/fr/pricing" component={Pricing} />
+      
+      {/* Menu page */}
+      <Route path="/menu/:restaurantName" component={Menu} />
+      <Route path="/fr/menu/:restaurantName" component={Menu} />
       
       {/* Feature pages */}
       <Route path="/en/features/table-reservations" component={TableReservations} />

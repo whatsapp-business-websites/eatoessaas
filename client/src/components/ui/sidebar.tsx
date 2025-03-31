@@ -1,7 +1,8 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { PanelLeft } from "lucide-react"
+import { PanelLeft, X } from "lucide-react"
+import { forwardRef } from "react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -155,108 +156,69 @@ const SidebarProvider = React.forwardRef<
 )
 SidebarProvider.displayName = "SidebarProvider"
 
-const Sidebar = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> & {
-    side?: "left" | "right"
-    variant?: "sidebar" | "floating" | "inset"
-    collapsible?: "offcanvas" | "icon" | "none"
-  }
->(
-  (
-    {
-      side = "left",
-      variant = "sidebar",
-      collapsible = "offcanvas",
-      className,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+  restaurantInfo: {
+    name: string;
+    address?: string;
+    openingTime?: string;
+    closingTime?: string;
+    description?: string;
+  };
+}
 
-    if (collapsible === "none") {
-      return (
-        <div
-          className={cn(
-            "flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground",
-            className
-          )}
-          ref={ref}
-          {...props}
-        >
-          {children}
-        </div>
-      )
-    }
+export function Sidebar({ isOpen, onClose, restaurantInfo }: SidebarProps) {
+  if (!isOpen) return null;
 
-    if (isMobile) {
-      return (
-        <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-          <SheetContent
-            data-sidebar="sidebar"
-            data-mobile="true"
-            className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-            style={
-              {
-                "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-              } as React.CSSProperties
-            }
-            side={side}
+  return (
+    <>
+      {/* Overlay */}
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={onClose}
+      />
+      
+      {/* Sidebar */}
+      <div className="fixed inset-y-0 left-0 w-[280px] bg-white z-50 transform transition-transform duration-300 ease-in-out">
+        <div className="p-4">
+          {/* Close button */}
+          <button 
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full"
           >
-            <div className="flex h-full w-full flex-col">{children}</div>
-          </SheetContent>
-        </Sheet>
-      )
-    }
+            <X size={24} />
+          </button>
 
-    return (
-      <div
-        ref={ref}
-        className="group peer hidden md:block"
-        data-state={state}
-        data-collapsible={state === "collapsed" ? collapsible : ""}
-        data-variant={variant}
-        data-side={side}
-      >
-        {/* This is what handles the sidebar gap on desktop */}
-        <div
-          className={cn(
-            "duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear",
-            "group-data-[collapsible=offcanvas]:w-0",
-            "group-data-[side=right]:rotate-180",
-            variant === "floating" || variant === "inset"
-              ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
-          )}
-        />
-        <div
-          className={cn(
-            "duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex",
-            side === "left"
-              ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
-              : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
-            // Adjust the padding for floating and inset variants.
-            variant === "floating" || variant === "inset"
-              ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
-            className
-          )}
-          {...props}
-        >
-          <div
-            data-sidebar="sidebar"
-            className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
-          >
-            {children}
+          {/* Restaurant Info */}
+          <div className="mt-8">
+            <h2 className="text-xl font-bold mb-4">{restaurantInfo.name}</h2>
+            
+            {restaurantInfo.description && (
+              <p className="text-gray-600 mb-4">{restaurantInfo.description}</p>
+            )}
+
+            {restaurantInfo.address && (
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-900 mb-1">Address</h3>
+                <p className="text-sm text-gray-600">{restaurantInfo.address}</p>
+              </div>
+            )}
+
+            {(restaurantInfo.openingTime || restaurantInfo.closingTime) && (
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-900 mb-1">Opening Hours</h3>
+                <p className="text-sm text-gray-600">
+                  {restaurantInfo.openingTime} - {restaurantInfo.closingTime}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    )
-  }
-)
-Sidebar.displayName = "Sidebar"
+    </>
+  );
+}
 
 const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
@@ -735,7 +697,6 @@ const SidebarMenuSubButton = React.forwardRef<
 SidebarMenuSubButton.displayName = "SidebarMenuSubButton"
 
 export {
-  Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
