@@ -1,28 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { MenuItemCard } from "./menu-item-card";
+import { MenuItem, Category } from "@/services/menuService";
 
-interface MenuItem {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  isVegetarian: boolean;
-  isBestseller?: boolean;
-  isChefRecommended?: boolean;
-  spicyLevel?: 1 | 2 | 3;
-  isCustomizable?: boolean;
-  image?: string;
-}
-
-interface MenuCategory {
-  id: string;
-  name: string;
+export interface MenuCategory {
+  _id: string;
+  category: string;
+  cloudinary_url: string;
+  publish: number;
+  isActive: boolean;
+  openTime?: string;
+  closeTime?: string;
   items: MenuItem[];
-  image?: string;
 }
 
-interface SynchronizedMenuViewProps {
+export interface SynchronizedMenuViewProps {
   categories: MenuCategory[];
   className?: string;
   onUpdateCart?: (item: MenuItem, quantity: number) => void;
@@ -30,7 +22,7 @@ interface SynchronizedMenuViewProps {
 }
 
 export function SynchronizedMenuView({ categories, className, onUpdateCart, showHeader = true }: SynchronizedMenuViewProps) {
-  const [activeCategory, setActiveCategory] = useState<string>(categories[0]?.id || "");
+  const [activeCategory, setActiveCategory] = useState<string>(categories[0]?._id || "");
   const contentRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const isScrollingRef = useRef(false);
@@ -146,32 +138,43 @@ export function SynchronizedMenuView({ categories, className, onUpdateCart, show
     <div className={cn("w-full flex flex-col", className)}>
       {/* Fixed Tab Bar */}
       <div 
-        className="fixed left-0 right-0 z-10 bg-white border-b border-gray-200 transition-all duration-300"
+        className="fixed left-0 right-0 z-[90] bg-white border-b border-gray-200 transition-all duration-300"
         style={{
           top: showHeader ? '112px' : '56px', // Dynamic positioning based on header visibility
+          pointerEvents: 'auto'
         }}
       >
         <div ref={tabBarRef} className="flex overflow-x-auto scrollbar-hide">
           {categories.map((category) => (
             <button
-              key={category.id}
-              data-category-tab={category.id}
-              onClick={() => scrollToCategory(category.id)}
+              key={category._id}
+              data-category-tab={category._id}
+              onClick={() => scrollToCategory(category._id)}
               className={cn(
-                "flex flex-col items-center px-4 py-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors",
-                activeCategory === category.id
+                "flex flex-col items-center px-4 py-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors min-w-[80px]",
+                activeCategory === category._id
                   ? "border-black text-black"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               )}
             >
-              <img 
-                src={category.image} 
-                alt={category.name}
-                className="w-12 h-12 rounded-full object-cover mb-1 mt-4"
-              />
-              <span className="text-[13px] text-center">
-                {category.name.split(' ').map((word, index) => (
-                  <span key={index} className="block">{word}</span>
+              <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 mb-1 mt-4">
+                <img 
+                  src={category.cloudinary_url} 
+                  alt={category.category}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span className="text-[13px] text-center max-w-[80px]">
+                {category.category.split(' ').reduce((lines: string[], word) => {
+                  const lastLine = lines[lines.length - 1] || '';
+                  if (lastLine.length + word.length <= 10) {
+                    lines[lines.length - 1] = lastLine ? `${lastLine} ${word}` : word;
+                  } else if (lines.length < 3) {
+                    lines.push(word);
+                  }
+                  return lines;
+                }, ['']).map((line, index) => (
+                  <span key={index} className="block truncate">{line}</span>
                 ))}
               </span>
             </button>
@@ -186,28 +189,33 @@ export function SynchronizedMenuView({ categories, className, onUpdateCart, show
         <div className="px-4">
           {categories.map((category) => (
             <div
-              key={category.id}
-              id={category.id}
-              data-category-section={category.id}
+              key={category._id}
+              id={category._id}
+              data-category-section={category._id}
               className="py-2"
             >
               <div className="flex items-center gap-3 mb-3">
-                <h2 className="text-xl font-bold">{category.name}</h2>
+                <h2 className="text-xl font-bold">{category.category}</h2>
               </div>
               <div className="space-y-3">
                 {category.items.map((item) => (
                   <MenuItemCard
-                    key={item.id}
-                    name={item.name}
+                    key={item._id}
+                    name={item.itemName}
                     description={item.description}
-                    price={item.price}
-                    isVegetarian={item.isVegetarian}
-                    isBestseller={item.isBestseller}
-                    isChefRecommended={item.isChefRecommended}
-                    spicyLevel={item.spicyLevel}
-                    isCustomizable={item.isCustomizable}
+                    price={parseFloat(item.price)}
+                    isVegetarian={item.type === 'veg' || item.type === 'na'}
+                    isBestseller={false}
+                    isChefRecommended={item.chefRecommend}
+                    spicyLevel={undefined}
+                    isCustomizable={true}
                     image={item.image}
-                    onUpdateCart={(quantity) => onUpdateCart?.(item, quantity)}
+                    video={item.video}
+                    varietyArr={item.varietyArr}
+                    onUpdateCart={(quantity, selectedVariety) => onUpdateCart?.(
+                      selectedVariety ? { ...item, price: selectedVariety.price } : item, 
+                      quantity
+                    )}
                   />
                 ))}
               </div>

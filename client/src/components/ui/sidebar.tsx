@@ -175,44 +175,64 @@ export function Sidebar({ isOpen, onClose, restaurantInfo }: SidebarProps) {
     <>
       {/* Overlay */}
       <div 
-        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[150] transition-opacity duration-300"
         onClick={onClose}
       />
       
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-[280px] bg-white z-50 transform transition-transform duration-300 ease-in-out">
-        <div className="p-4">
-          {/* Close button */}
-          <button 
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full"
-          >
-            <X size={24} />
-          </button>
+      <div 
+        className={`fixed inset-y-0 right-0 w-[280px] bg-white z-[151] transform transition-transform duration-300 ease-in-out shadow-xl ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full">
+          {/* Header */}
+          <div className="flex items-center justify-between p-4 border-b">
+            <div className="flex items-center gap-3">
+              <h2 className="text-xl font-bold">{restaurantInfo.name}</h2>
+            </div>
+            <button 
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="Close sidebar"
+            >
+              <X size={24} />
+            </button>
+          </div>
 
-          {/* Restaurant Info */}
-          <div className="mt-8">
-            <h2 className="text-xl font-bold mb-4">{restaurantInfo.name}</h2>
-            
+          {/* Content */}
+          <div className="flex-1 overflow-y-auto p-4">
             {restaurantInfo.description && (
-              <p className="text-gray-600 mb-4">{restaurantInfo.description}</p>
+              <div className="mb-6">
+                <p className="text-gray-600">{restaurantInfo.description}</p>
+              </div>
             )}
 
             {restaurantInfo.address && (
-              <div className="mb-4">
-                <h3 className="text-sm font-semibold text-gray-900 mb-1">Address</h3>
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">Address</h3>
                 <p className="text-sm text-gray-600">{restaurantInfo.address}</p>
               </div>
             )}
 
             {(restaurantInfo.openingTime || restaurantInfo.closingTime) && (
-              <div className="mb-4">
-                <h3 className="text-sm font-semibold text-gray-900 mb-1">Opening Hours</h3>
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">Opening Hours</h3>
                 <p className="text-sm text-gray-600">
                   {restaurantInfo.openingTime} - {restaurantInfo.closingTime}
                 </p>
               </div>
             )}
+          </div>
+
+          {/* Footer */}
+          <div className="p-4 border-t">
+            <a 
+              href="/login" 
+              className="block w-full py-2.5 px-4 text-center text-white bg-black hover:bg-gray-800 rounded-md transition-colors duration-200 font-medium"
+            >
+              Login
+            </a>
           </div>
         </div>
       </div>

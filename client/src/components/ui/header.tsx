@@ -1,43 +1,38 @@
 import { Menu } from "lucide-react";
 
-export interface HeaderProps {
+interface HeaderProps {
   restaurantName: string;
-  logo: string;
+  logo?: string;
   onMenuClick: () => void;
-  className?: string;
   isVisible?: boolean;
 }
 
-export function Header({ 
-  restaurantName, 
-  logo, 
-  onMenuClick, 
-  className = '',
-  isVisible = true,
-}: HeaderProps) {
-  
+export function Header({ restaurantName, logo, onMenuClick, isVisible = true }: HeaderProps) {
   return (
     <header 
-      className={`bg-white border-b border-gray-200 transition-all duration-300 ease-in-out ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
-      } ${className}`}
+      className={`bg-white h-14 border-b border-gray-200 transition-opacity duration-300 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
     >
-      <div className="h-14 flex items-center px-4">
+      <div className="h-full px-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          {logo ? (
+            <img 
+              src={logo} 
+              alt={`${restaurantName} logo`}
+              className="w-8 h-8 rounded-full object-cover"
+            />
+          ) : null}
+          <h1 className="text-lg font-semibold truncate">{restaurantName}</h1>
+        </div>
+        
         <button
           onClick={onMenuClick}
-          className="p-2 -ml-2 text-gray-600 hover:text-gray-900"
+          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          aria-label="Open menu"
         >
           <Menu className="w-6 h-6" />
         </button>
-        
-        <div className="flex items-center gap-3 ml-2">
-          <img
-            src={logo}
-            alt={`${restaurantName} logo`}
-            className="w-8 h-8 rounded-full object-cover"
-          />
-          <h1 className="text-lg font-semibold">{restaurantName}</h1>
-        </div>
       </div>
     </header>
   );

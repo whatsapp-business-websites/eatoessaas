@@ -8,17 +8,18 @@ import {
   DropdownMenuTrigger,
 } from './dropdown-menu';
 import { cn } from '@/lib/utils';
-
-export type MenuType = 'food' | 'drinks' | 'desserts' | 'special';
+import { Category } from '@/services/menuService';
 
 interface MenuControlsProps {
   onSearch: (query: string) => void;
-  onMenuTypeChange: (type: MenuType) => void;
-  currentMenuType: MenuType;
+  onMenuTypeChange: (categoryId: string) => void;
+  currentMenuType: string;
+  categories: Category[];
 }
 
-export function MenuControls({ onSearch, onMenuTypeChange, currentMenuType }: MenuControlsProps) {
+export function MenuControls({ onSearch, onMenuTypeChange, currentMenuType, categories }: MenuControlsProps) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
@@ -26,15 +27,8 @@ export function MenuControls({ onSearch, onMenuTypeChange, currentMenuType }: Me
     onSearch(query);
   };
 
-  const menuTypeLabels: Record<MenuType, string> = {
-    food: 'Food Menu',
-    drinks: 'Drinks Menu',
-    desserts: 'Desserts Menu',
-    special: 'Special Menu'
-  };
-
   return (
-    <div className="w-full bg-white border-b border-gray-200">
+    <div className="w-full bg-white border-b border-gray-200 relative z-[100]">
       <div className="px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="flex-1 relative">
@@ -48,29 +42,36 @@ export function MenuControls({ onSearch, onMenuTypeChange, currentMenuType }: Me
             />
           </div>
           
-          <DropdownMenu>
+          <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="h-10 flex items-center gap-2 whitespace-nowrap border-gray-300"
+                className="h-10 flex items-center gap-2 whitespace-nowrap border-gray-300 relative z-[100]"
               >
-                {menuTypeLabels[currentMenuType]}
+                {categories.find(cat => cat._id === currentMenuType)?.category.slice(0, 30) + (categories.find(cat => cat._id === currentMenuType)?.category.length > 30 ? '...' : '') || 'Select Category'}
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[200px] bg-white border-gray-300">
-              {Object.entries(menuTypeLabels).map(([type, label]) => (
+            <DropdownMenuContent 
+              align="end" 
+              className="w-[280px] bg-white border-gray-300 z-[200]"
+              forceMount={isOpen}
+            >
+              {categories.map((category) => (
                 <DropdownMenuItem
-                  key={type}
-                  onClick={() => onMenuTypeChange(type as MenuType)}
+                  key={category._id}
+                  onClick={() => {
+                    onMenuTypeChange(category._id);
+                    setIsOpen(false);
+                  }}
                   className={cn(
                     "flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100 text-base",
-                    currentMenuType === type && "bg-gray-100"
+                    currentMenuType === category._id && "bg-gray-100"
                   )}
                 >
-                  <span>{label}</span>
-                  {currentMenuType === type && (
+                  <span className="truncate max-w-[240px]">{category.category}</span>
+                  {currentMenuType === category._id && (
                     <Check className="w-4 h-4 ml-auto" />
                   )}
                 </DropdownMenuItem>

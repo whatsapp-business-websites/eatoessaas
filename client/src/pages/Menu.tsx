@@ -1,415 +1,34 @@
 import { useState, useMemo, useEffect, useRef } from "react";
+import { useParams } from "wouter";
 import { CartNotification } from "@/components/ui/cart-notification";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { SynchronizedMenuView } from "@/components/ui/synchronized-menu-view";
+import { SynchronizedMenuView, MenuCategory } from "@/components/ui/synchronized-menu-view";
 import { MenuItemCard } from "@/components/ui/menu-item-card";
-import { MenuControls, MenuType } from "@/components/ui/menu-controls";
+import { MenuControls } from "@/components/ui/menu-controls";
 import { MenuFilter } from "@/components/ui/menu-filter";
+import { fetchMenu, MenuData, MenuItem, Category, SubCategory, getFullImageUrl } from "@/services/menuService";
 
 interface CartItem {
-  id: number;
-  quantity: number;
-}
-
-interface MenuItem {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  isVegetarian: boolean;
-  isBestseller?: boolean;
-  isChefRecommended?: boolean;
-  spicyLevel?: 1 | 2 | 3;
-  isCustomizable?: boolean;
-  image?: string;
-}
-
-interface MenuCategory {
   id: string;
+  quantity: number;
+  price: string;
   name: string;
-  image: string;
-  items: MenuItem[];
 }
-
-interface MenuData {
-  restaurantName: string;
-  deliveryTime: string;
-  categories: MenuCategory[];
-}
-
-interface SynchronizedMenuViewProps {
-  categories: MenuCategory[];
-  className?: string;
-  onUpdateCart?: (item: MenuItem, quantity: number) => void;
-  showHeader?: boolean;
-}
-
-// Sample menu data for different menu types
-const menuTypesData: Record<MenuType, MenuData> = {
-  food: {
-    restaurantName: "Adil Hotel",
-    deliveryTime: "35-40 mins",
-    categories: [
-      {
-        id: "recommended",
-        name: "Recommended",
-        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 1,
-            name: "Butter Chicken",
-            description: "Tender chicken cooked in a rich, creamy tomato-based curry sauce with butter and aromatic spices",
-            price: 320,
-            isVegetarian: false,
-            isBestseller: true,
-            spicyLevel: 2,
-            isCustomizable: true,
-            // No image for this dish
-          },
-          {
-            id: 2,
-            name: "Paneer Tikka Masala",
-            description: "Grilled cottage cheese cubes in a creamy, spiced tomato gravy",
-            price: 280,
-            isVegetarian: true,
-            isChefRecommended: true,
-            spicyLevel: 1,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 3,
-            name: "Andhra Style Chicken Curry",
-            description: "Fiery hot chicken curry made with traditional Andhra spices and red chilies",
-            price: 340,
-            isVegetarian: false,
-            spicyLevel: 3,
-            isCustomizable: true,
-            // No image for this dish
-          },
-          {
-            id: 4,
-            name: "Dal Makhani",
-            description: "Creamy black lentils slow-cooked overnight with mild spices",
-            price: 220,
-            isVegetarian: true,
-            isBestseller: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 5,
-            name: "Hyderabadi Biryani",
-            description: "Aromatic basmati rice layered with tender meat and signature spices",
-            price: 380,
-            isVegetarian: false,
-            isChefRecommended: true,
-            spicyLevel: 2,
-            isCustomizable: true,
-            // No image for this dish
-          },
-          {
-            id: 6,
-            name: "Palak Paneer",
-            description: "Fresh cottage cheese cubes in a creamy spinach gravy",
-            price: 260,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      },
-      {
-        id: "main-courses",
-        name: "Main Courses",
-        image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 7,
-            name: "Chicken Curry",
-            description: "In this easy Indian chicken curry chicken breasts are simmered in an aromatic tomato-based sauce until tender.",
-            price: 129,
-            isVegetarian: false,
-            isBestseller: true,
-            spicyLevel: 2,
-            isCustomizable: true,
-            // No image for this dish
-          },
-          {
-            id: 8,
-            name: "Paneer Makhani",
-            description: "Cottage cheese in rich, creamy tomato sauce with aromatic spices",
-            price: 224,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 9,
-            name: "Chicken Biryani",
-            description: "Fragrant basmati rice cooked with tender chicken pieces and aromatic spices",
-            price: 299,
-            isVegetarian: false,
-            isBestseller: true,
-            spicyLevel: 2,
-            isCustomizable: true,
-            // No image for this dish
-          },
-          {
-            id: 10,
-            name: "Malai Kofta",
-            description: "Soft potato and paneer dumplings in a rich creamy gravy",
-            price: 239,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 11,
-            name: "Fish Curry",
-            description: "Fresh fish pieces cooked in a tangy coconut-based curry",
-            price: 299,
-            isVegetarian: false,
-            spicyLevel: 1,
-            isCustomizable: true,
-            // No image for this dish
-          },
-          {
-            id: 12,
-            name: "Chana Masala",
-            description: "Chickpeas cooked with onions, tomatoes and traditional spices",
-            price: 189,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ],
-      },
-      {
-        id: "starters",
-        name: "Starters",
-        image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 13,
-            name: "Samosa",
-            description: "Crispy pastry filled with spiced potatoes and peas",
-            price: 80,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 14,
-            name: "Chicken 65",
-            description: "Spicy deep-fried chicken marinated in special spices",
-            price: 180,
-            isVegetarian: false,
-            spicyLevel: 2,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      },
-      {
-        id: "breads",
-        name: "Breads",
-        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 17,
-            name: "Butter Naan",
-            description: "Freshly baked Indian bread with butter",
-            price: 60,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 18,
-            name: "Garlic Cheese Naan",
-            description: "Naan stuffed with garlic and cheese",
-            price: 80,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 19,
-            name: "Tandoori Roti",
-            description: "Whole wheat bread baked in tandoor",
-            price: 40,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      },
-      {
-        id: "snacks",
-        name: "Snacks",
-        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 23,
-            name: "Bhel Puri",
-            description: "Crispy puffed rice with tangy chutneys",
-            price: 100,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 24,
-            name: "Pani Puri",
-            description: "Hollow crisp with spicy water",
-            price: 120,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 25,
-            name: "Dahi Puri",
-            description: "Crisp puri with yogurt and chutneys",
-            price: 110,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      },
-      {
-        id: "desserts",
-        name: "Desserts",
-        image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 15,
-            name: "Gulab Jamun",
-            description: "Sweet milk dumplings soaked in sugar syrup",
-            price: 120,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 16,
-            name: "Rasmalai",
-            description: "Soft cottage cheese dumplings in sweet milk",
-            price: 140,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      }
-    ]
-  },
-  drinks: {
-    restaurantName: "Adil Hotel",
-    deliveryTime: "35-40 mins",
-    categories: [
-      {
-        id: "beverages",
-        name: "Beverages",
-        image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 20,
-            name: "Mango Lassi",
-            description: "Sweet yogurt drink with mango pulp",
-            price: 120,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 21,
-            name: "Masala Chai",
-            description: "Traditional spiced Indian tea",
-            price: 60,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 22,
-            name: "Fresh Lime Soda",
-            description: "Refreshing lime drink with mint",
-            price: 80,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      }
-    ]
-  },
-  desserts: {
-    restaurantName: "Adil Hotel",
-    deliveryTime: "35-40 mins",
-    categories: [
-      {
-        id: "desserts",
-        name: "Desserts",
-        image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 15,
-            name: "Gulab Jamun",
-            description: "Sweet milk dumplings soaked in sugar syrup",
-            price: 120,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          },
-          {
-            id: 16,
-            name: "Rasmalai",
-            description: "Soft cottage cheese dumplings in sweet milk",
-            price: 140,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      }
-    ]
-  },
-  special: {
-    restaurantName: "Adil Hotel",
-    deliveryTime: "35-40 mins",
-    categories: [
-      {
-        id: "daily-specials",
-        name: "Daily Specials",
-        image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=100&h=100&fit=crop",
-        items: [
-          {
-            id: 26,
-            name: "Chef's Special Thali",
-            description: "A complete meal with variety of dishes",
-            price: 450,
-            isVegetarian: true,
-            isCustomizable: true,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/fh2dxv9fh4ply41m9tom"
-          }
-        ]
-      }
-    ]
-  }
-};
 
 export default function Menu() {
+  const params = useParams();
+  const restaurantName = params?.restaurantName as string | undefined;
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [currentMenuType, setCurrentMenuType] = useState<MenuType>('food');
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [vegFilter, setVegFilter] = useState(false);
   const [nonVegFilter, setNonVegFilter] = useState(false);
+  const [menuData, setMenuData] = useState<MenuData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const isMobile = useIsMobile();
   
   // Simplified scroll state management
@@ -417,40 +36,75 @@ export default function Menu() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
+    const loadMenu = async () => {
+      if (!restaurantName) {
+        setError('Restaurant name is required');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const response = await fetchMenu(restaurantName);
+        setMenuData(response.body.menuitems);
+        // Set the first category as selected by default
+        if (response.body.menuitems.categories.length > 0) {
+          setSelectedCategoryId(response.body.menuitems.categories[0]._id);
+        }
+      } catch (err) {
+        setError('Failed to load menu data');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMenu();
+  }, [restaurantName]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Only show header when at the very top (scroll position = 0)
       setShowHeader(currentScrollY === 0);
-      
       lastScrollY.current = currentScrollY;
     };
 
-    // Add scroll event listener
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Initial check
     handleScroll();
-    
-    // Cleanup
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleUpdateCart = (item: any, quantity: number) => {
+  // Ensure the header's container doesn't block clicks when hidden
+  useEffect(() => {
+    // Update pointer-events on any potential overlapping elements
+    const headerContainer = document.querySelector('.header-container') as HTMLElement;
+    if (headerContainer) {
+      headerContainer.style.pointerEvents = showHeader ? 'auto' : 'none';
+    }
+  }, [showHeader]);
+
+  const handleUpdateCart = (item: MenuItem, quantity: number) => {
     setCartItems(prev => {
-      const existingItem = prev.find(cartItem => cartItem.id === item.id);
+      const existingItem = prev.find(cartItem => cartItem.id === item._id);
       if (existingItem) {
         if (quantity === 0) {
-          return prev.filter(cartItem => cartItem.id !== item.id);
+          return prev.filter(cartItem => cartItem.id !== item._id);
         }
         return prev.map(cartItem =>
-          cartItem.id === item.id ? { ...cartItem, quantity } : cartItem
+          cartItem.id === item._id ? { 
+            ...cartItem, 
+            quantity,
+            price: item.price // Update price in case it changed due to variety selection
+          } : cartItem
         );
       }
       if (quantity === 0) return prev;
-      return [...prev, { id: item.id, quantity }];
+      return [...prev, { 
+        id: item._id, 
+        quantity,
+        price: item.price,
+        name: item.itemName
+      }];
     });
   };
 
@@ -458,38 +112,59 @@ export default function Menu() {
     setSearchQuery(query);
   };
 
-  const handleMenuTypeChange = (type: MenuType) => {
-    setCurrentMenuType(type);
-  };
+  const filteredSubCategories = useMemo(() => {
+    if (!menuData) return [];
 
-  const filteredCategories = useMemo(() => {
-    const menuData = menuTypesData[currentMenuType];
-    let filteredItems = menuData.categories;
+    // Get subcategories for the selected category
+    const subCategories = menuData.subCategories.filter(
+      sub => sub.category_id === selectedCategoryId
+    );
+
+    // Get items for these subcategories
+    const items = menuData.items.filter(item =>
+      subCategories.some(sub => sub._id === item.subCategory_id)
+    );
+
+    // Map subcategories to match MenuCategory interface
+    const mappedSubCategories = subCategories.map(sub => ({
+      _id: sub._id,
+      category: sub.subCategory, // Use subCategory as the category name
+      cloudinary_url: getFullImageUrl(sub.cloudinary_url),
+      publish: 1, // Default value since subcategories don't have publish
+      isActive: true, // Default value since subcategories don't have isActive
+      items: items
+        .filter(item => item.subCategory_id === sub._id)
+        .map(item => ({
+          ...item,
+          image: getFullImageUrl(item.image)
+        }))
+    }));
 
     // Apply search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filteredItems = filteredItems.map(category => ({
-        ...category,
-        items: category.items.filter(item =>
-          item.name.toLowerCase().includes(query) ||
+      return mappedSubCategories.map(sub => ({
+        ...sub,
+        items: sub.items.filter(item =>
+          item.itemName.toLowerCase().includes(query) ||
           item.description.toLowerCase().includes(query)
         )
-      })).filter(category => category.items.length > 0);
+      })).filter(sub => sub.items.length > 0);
     }
 
     // Apply dietary filters
     if (vegFilter || nonVegFilter) {
-      filteredItems = filteredItems.map(category => ({
-        ...category,
-        items: category.items.filter(item => 
-          (vegFilter && item.isVegetarian) || (nonVegFilter && !item.isVegetarian)
+      return mappedSubCategories.map(sub => ({
+        ...sub,
+        items: sub.items.filter(item => 
+          (vegFilter && ['veg', 'na'].includes(item.type as string)) || 
+          (nonVegFilter && item.type === 'nonVeg')
         )
-      })).filter(category => category.items.length > 0);
+      })).filter(sub => sub.items.length > 0);
     }
 
-    return filteredItems;
-  }, [currentMenuType, searchQuery, vegFilter, nonVegFilter]);
+    return mappedSubCategories;
+  }, [menuData, selectedCategoryId, searchQuery, vegFilter, nonVegFilter]);
 
   const handleFilterChange = (filter: 'all' | 'veg' | 'non-veg') => {
     switch (filter) {
@@ -509,50 +184,57 @@ export default function Menu() {
   };
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const totalAmount = cartItems.reduce((sum, item) => {
-    const menuItem = Object.values(menuTypesData)
-      .flatMap(data => data.categories)
-      .flatMap(cat => cat.items)
-      .find(menuItem => menuItem.id === item.id);
-    return sum + (menuItem?.price ?? 0) * item.quantity;
-  }, 0);
+  const totalAmount = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
 
-  const restaurantInfo = {
-    name: menuTypesData[currentMenuType].restaurantName,
-    address: "123 Main Street, City, State 12345",
-    openingTime: "11:00 AM",
-    closingTime: "11:00 PM",
-    description: "Serving authentic Indian cuisine with love since 1995. Known for our traditional recipes and warm hospitality."
-  };
+  const restaurantInfo = menuData ? {
+    name: menuData.title,
+    address: "123 Main Street, City, State 12345", // This should come from API if available
+    openingTime: menuData.categories[0]?.openTime || "11:00 AM",
+    closingTime: menuData.categories[0]?.closeTime || "11:00 PM",
+    description: "Serving authentic cuisine with love. Known for our traditional recipes and warm hospitality."
+  } : null;
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="min-h-screen flex items-center justify-center text-red-500">{error}</div>;
+  }
+
+  if (!menuData || !restaurantInfo) {
+    return <div className="min-h-screen flex items-center justify-center">No menu data available</div>;
+  }
 
   return (
     <div className="min-h-screen bg-white">
       {/* Mobile Layout */}
       {isMobile && (
-        <div className="flex flex-col min-h-screen">
-          {/* Header Container - Has conditional visibility via prop */}
-          <div className="fixed inset-x-0 top-0 z-30">
+        <div className="flex flex-col min-h-screen relative">
+          {/* Header Container */}
+          <div className={`fixed inset-x-0 top-0 z-[140] header-container transition-transform duration-300 ${
+            !showHeader ? 'transform -translate-y-full' : 'transform translate-y-0'
+          }`}>
             <Header 
-              restaurantName={menuTypesData[currentMenuType].restaurantName}
-              logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTsU0UkkQef5LeD9zRb94BZycu3DdF-ky8SA&s"
+              restaurantName={restaurantInfo.name}
+              logo={getFullImageUrl(menuData.cloudinary_Iconurl)}
               onMenuClick={() => setIsSidebarOpen(true)}
               isVisible={showHeader}
             />
           </div>
 
-          {/* Menu Controls - Always fixed and visible regardless of scroll */}
+          {/* Menu Controls */}
           <div 
-            className="fixed inset-x-0 z-20 bg-white transition-all duration-300"
-            style={{ 
-              top: showHeader ? '56px' : '0px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-              height: '56px' // Explicitly set height
-            }}
+            className={`fixed inset-x-0 z-[130] bg-white shadow-md transition-all duration-300 ${
+              showHeader ? 'top-[56px]' : 'top-0'
+            }`}
+            style={{ height: '56px' }}
           >
             <MenuControls
               onSearch={handleSearch}
-              onMenuTypeChange={handleMenuTypeChange}
-              currentMenuType={currentMenuType}
+              onMenuTypeChange={setSelectedCategoryId}
+              currentMenuType={selectedCategoryId}
+              categories={menuData?.categories || []}
             />
           </div>
 
@@ -563,12 +245,12 @@ export default function Menu() {
             restaurantInfo={restaurantInfo}
           />
 
-          {/* Main Content with dynamic padding */}
+          {/* Main Content */}
           <main className={`flex-1 transition-all duration-300 ${
-            showHeader ? 'pt-[184px]' : 'pt-[128px]'
+            showHeader ? 'pt-[112px]' : 'pt-[56px]'
           } ${totalItems > 0 ? 'pb-32' : 'pb-16'}`}>
             <SynchronizedMenuView 
-              categories={filteredCategories}
+              categories={filteredSubCategories}
               className="min-h-full"
               onUpdateCart={handleUpdateCart}
               showHeader={showHeader}
@@ -576,8 +258,8 @@ export default function Menu() {
           </main>
 
           {/* Bottom Fixed Container */}
-          <div className="fixed inset-x-0 bottom-0">
-            {/* Filter Component - Moves up when cart is present */}
+          <div className="fixed inset-x-0 bottom-0 z-[120]">
+            {/* Filter Component */}
             <div className={`w-full bg-white border-t border-gray-200 transition-transform duration-300 ${
               totalItems > 0 ? 'transform -translate-y-[44px]' : ''
             }`}>
@@ -591,7 +273,7 @@ export default function Menu() {
 
             {/* Cart Notification */}
             {totalItems > 0 && (
-              <div className="w-full bg-white">
+              <div className="w-full bg-white border-t border-gray-200 shadow-lg">
                 <CartNotification 
                   itemCount={totalItems}
                   totalAmount={totalAmount}
@@ -610,11 +292,11 @@ export default function Menu() {
             <div className="p-4">
               <div className="flex items-center gap-3 mb-6">
                 <img 
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTsU0UkkQef5LeD9zRb94BZycu3DdF-ky8SA&s"
-                  alt={`${menuTypesData[currentMenuType].restaurantName} logo`}
+                  src={getFullImageUrl(menuData.cloudinary_Iconurl)}
+                  alt={`${restaurantInfo.name} logo`}
                   className="w-10 h-10 rounded-full object-cover"
                 />
-                <h1 className="text-xl font-bold">{menuTypesData[currentMenuType].restaurantName}</h1>
+                <h1 className="text-xl font-bold">{restaurantInfo.name}</h1>
               </div>
               
               {restaurantInfo.description && (
@@ -644,7 +326,7 @@ export default function Menu() {
             totalItems > 0 ? 'pb-40' : 'pb-24'
           }`}>
             <SynchronizedMenuView 
-              categories={filteredCategories}
+              categories={filteredSubCategories}
               className="h-full"
               onUpdateCart={handleUpdateCart}
             />
