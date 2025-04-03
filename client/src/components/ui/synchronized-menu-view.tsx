@@ -140,9 +140,8 @@ export function SynchronizedMenuView({ categories, className, onUpdateCart, show
       <div 
         className="fixed left-0 right-0 z-[90] bg-white border-b border-gray-200 transition-all duration-300"
         style={{
-          top: showHeader ? '112px' : '56px',
-          pointerEvents: 'auto',
-          height: '72px'
+          top: showHeader ? '112px' : '56px', // Dynamic positioning based on header visibility
+          pointerEvents: 'auto'
         }}
       >
         <div ref={tabBarRef} className="flex overflow-x-auto scrollbar-hide">
@@ -185,7 +184,7 @@ export function SynchronizedMenuView({ categories, className, onUpdateCart, show
 
       {/* Scrollable Content */}
       <div ref={contentRef} className={`flex-1 transition-all duration-300 ${
-        showHeader ? 'pt-[104px]' : 'pt-[104px]'
+        showHeader ? 'pt-[92px]' : 'pt-[92px]'
       }`}>
         <div className="px-4">
           {categories.map((category) => (
@@ -193,7 +192,7 @@ export function SynchronizedMenuView({ categories, className, onUpdateCart, show
               key={category._id}
               id={category._id}
               data-category-section={category._id}
-              className="py-4"
+              className="py-2"
             >
               <div className="flex items-center gap-3 mb-3">
                 <h2 className="text-xl font-bold">{category.category}</h2>
